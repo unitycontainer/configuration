@@ -4,6 +4,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using Microsoft.Practices.ObjectBuilder2;
+using System.Linq;
 
 namespace Microsoft.Practices.Unity.TestSupport.Configuration
 {
@@ -49,9 +50,10 @@ namespace Microsoft.Practices.Unity.TestSupport.Configuration
 
         private static Stream GetResourceStream(string configFileName)
         {
-            string resourceName = Sequence.Collect(GetResourceNamespace(), configFileName, "config").JoinStrings(".");
-
+            var name = configFileName + ".config";
             var currentAssembly = typeof(TResourceLocator).Assembly;
+            string resourceName = currentAssembly.GetManifestResourceNames().First(it => it.EndsWith(name));
+
             return currentAssembly.GetManifestResourceStream(resourceName);
         }
 

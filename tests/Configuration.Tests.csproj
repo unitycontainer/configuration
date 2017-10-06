@@ -7,6 +7,54 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ConfigFiles\ArrayInjection.config" />
+    <None Remove="ConfigFiles\BasicTypeMapping.config" />
+    <None Remove="ConfigFiles\Bootstrap.config" />
+    <None Remove="ConfigFiles\ContainerExtensions.config" />
+    <None Remove="ConfigFiles\EmptySection.config" />
+    <None Remove="ConfigFiles\Generics.config" />
+    <None Remove="ConfigFiles\InjectingGenerics.config" />
+    <None Remove="ConfigFiles\InjectingProperties.config" />
+    <None Remove="ConfigFiles\Lifetimes.config" />
+    <None Remove="ConfigFiles\MethodInjection.config" />
+    <None Remove="ConfigFiles\OldAliasesSyntax.config" />
+    <None Remove="ConfigFiles\OldContainersSyntax.config" />
+    <None Remove="ConfigFiles\OldTypeMappingSyntax.config" />
+    <None Remove="ConfigFiles\OptionalDependency.config" />
+    <None Remove="ConfigFiles\RegisteringInstances.config" />
+    <None Remove="ConfigFiles\RegistrationWithConstructors.config" />
+    <None Remove="ConfigFiles\SectionExtensions.config" />
+    <None Remove="ConfigFiles\SingleSectionMultipleNamedContainers.config" />
+    <None Remove="ConfigFiles\SingleSectionSingleContainer.config" />
+    <None Remove="ConfigFiles\TwoContainersAndAliases.config" />
+    <None Remove="ConfigFiles\VariousConstructors.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="ConfigFiles\ArrayInjection.config" />
+    <EmbeddedResource Include="ConfigFiles\BasicTypeMapping.config" />
+    <EmbeddedResource Include="ConfigFiles\Bootstrap.config" />
+    <EmbeddedResource Include="ConfigFiles\ContainerExtensions.config" />
+    <EmbeddedResource Include="ConfigFiles\EmptySection.config" />
+    <EmbeddedResource Include="ConfigFiles\Generics.config" />
+    <EmbeddedResource Include="ConfigFiles\InjectingGenerics.config" />
+    <EmbeddedResource Include="ConfigFiles\InjectingProperties.config" />
+    <EmbeddedResource Include="ConfigFiles\Lifetimes.config" />
+    <EmbeddedResource Include="ConfigFiles\MethodInjection.config" />
+    <EmbeddedResource Include="ConfigFiles\OldAliasesSyntax.config" />
+    <EmbeddedResource Include="ConfigFiles\OldContainersSyntax.config" />
+    <EmbeddedResource Include="ConfigFiles\OldTypeMappingSyntax.config" />
+    <EmbeddedResource Include="ConfigFiles\OptionalDependency.config" />
+    <EmbeddedResource Include="ConfigFiles\RegisteringInstances.config" />
+    <EmbeddedResource Include="ConfigFiles\RegistrationWithConstructors.config" />
+    <EmbeddedResource Include="ConfigFiles\SectionExtensions.config" />
+    <EmbeddedResource Include="ConfigFiles\SingleSectionMultipleNamedContainers.config" />
+    <EmbeddedResource Include="ConfigFiles\SingleSectionSingleContainer.config" />
+    <EmbeddedResource Include="ConfigFiles\TwoContainersAndAliases.config" />
+    <EmbeddedResource Include="ConfigFiles\VariousConstructors.config" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
@@ -19,6 +67,10 @@
 
   <ItemGroup>
     <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
 </Project>
