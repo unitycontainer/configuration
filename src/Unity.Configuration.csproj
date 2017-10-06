@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net47;net45;net40</TargetFrameworks>
+    <TargetFrameworks>net47;net45</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Unity Configuration</Description>
     <Version>5.0.0-beta</Version>
@@ -27,10 +27,11 @@
 
   <PropertyGroup>
     <DebugType Condition="'$(TargetFramework)' != '' AND !$(TargetFramework.StartsWith('netcoreapp'))">Full</DebugType>
+    <RootNamespace>Microsoft.Practices.Unity.Configuration</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Unity\Unity.csproj" />
+    <ProjectReference Include="..\..\Unity\src\Unity.csproj" />
   </ItemGroup>
 
   <ItemGroup>

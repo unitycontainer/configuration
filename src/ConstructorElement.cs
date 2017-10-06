@@ -98,7 +98,8 @@ namespace Microsoft.Practices.Unity.Configuration
                 return false;
             }
 
-            return Sequence.Zip(this.Parameters, constructorParams).All(pair => pair.First.Matches(pair.Second));
+            return Parameters.Zip(constructorParams, (a, b) => new Tuple<ParameterElement, ParameterInfo>(a, b))
+                             .All(pair => pair.Item1.Matches(pair.Item2));
         }
 
         private InjectionMember MakeInjectionMember(IUnityContainer container, ConstructorInfo constructorToCall)

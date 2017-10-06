@@ -98,11 +98,13 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <param name="container">Container to configure.</param>
         internal void ConfigureContainer(IUnityContainer container)
         {
-            this.Extensions.Cast<ContainerConfiguringElement>()
-                .Concat(this.Registrations.Cast<ContainerConfiguringElement>())
-                .Concat(this.Instances.Cast<ContainerConfiguringElement>())
-                .Concat(this.ConfiguringElements)
-                .ForEach(element => element.ConfigureContainerInternal(container));
+            foreach (var element in Extensions.Cast<ContainerConfiguringElement>()
+                                             .Concat(Registrations.Cast<ContainerConfiguringElement>())
+                                             .Concat(Instances.Cast<ContainerConfiguringElement>())
+                                             .Concat(ConfiguringElements))
+            {
+                element.ConfigureContainerInternal(container);
+            }
         }
 
         /// <summary>
