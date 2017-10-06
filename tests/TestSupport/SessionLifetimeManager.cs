@@ -92,7 +92,7 @@ namespace Microsoft.Practices.Unity.TestSupport
         private static string Reverse(IEnumerable<char> s)
         {
             var chars = new Stack<char>(s);
-            return chars.JoinStrings(String.Empty);
+            return string.Join( String.Empty, chars);
         }
     }
 }
