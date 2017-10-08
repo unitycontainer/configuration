@@ -79,7 +79,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         private RegistrationsToAssertOn AssertRegistration<TRegisterType>(string registeredName)
         {
             return new RegistrationsToAssertOn(
-                this.container.Registrations
+                container.Registrations
                     .Where(r => r.RegisteredType == typeof(TRegisterType) && r.Name == registeredName));
         }
     }
