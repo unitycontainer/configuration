@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Text;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+using Unity;
 using Unity.Configuration.Properties;
 
 namespace Microsoft.Practices.Unity.Configuration

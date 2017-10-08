@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests.TestObjects
 {

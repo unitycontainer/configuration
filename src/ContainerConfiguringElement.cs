@@ -3,6 +3,7 @@
 using System.Globalization;
 using System.Threading;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

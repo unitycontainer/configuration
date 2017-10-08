@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.Practices.Unity.Configuration.Tests.ConfigFiles;
 using Microsoft.Practices.Unity.TestSupport.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests
 {

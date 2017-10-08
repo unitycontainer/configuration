@@ -3,6 +3,7 @@
 using System;
 using System.Configuration;
 using Microsoft.Practices.Unity.Utility;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

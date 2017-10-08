@@ -9,6 +9,7 @@ using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Properties;
 using Microsoft.Practices.Unity.Utility;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

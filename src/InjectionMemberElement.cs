@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Microsoft.Practices.Unity.Utility;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
