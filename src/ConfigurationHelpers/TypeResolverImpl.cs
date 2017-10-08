@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
-using Microsoft.Practices.Unity.Configuration.Properties;
+using Unity.Configuration.Properties;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {

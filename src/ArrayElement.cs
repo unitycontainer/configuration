@@ -7,7 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Configuration.Properties;
+using Unity.Configuration.Properties;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
