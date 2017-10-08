@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Unity.Configuration.Properties;
+using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {

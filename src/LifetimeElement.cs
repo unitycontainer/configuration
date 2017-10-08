@@ -7,6 +7,7 @@ using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Microsoft.Practices.Unity.Utility;
 using Unity;
+using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
