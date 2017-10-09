@@ -10,6 +10,7 @@ using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
 using Unity.Configuration.Properties;
+using Unity.Injection;
 using Unity.Registration;
 
 namespace Microsoft.Practices.Unity.Configuration

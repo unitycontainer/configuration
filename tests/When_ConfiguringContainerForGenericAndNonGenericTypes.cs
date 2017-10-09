@@ -6,6 +6,7 @@ using Microsoft.Practices.Unity.Configuration.Tests.TestObjects.MyGenericTypes;
 using Microsoft.Practices.Unity.TestSupport.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Unity;
+using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests
 {
