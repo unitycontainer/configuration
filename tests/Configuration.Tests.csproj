@@ -62,7 +62,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Abstractions\src\Unity.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Unity\src\Unity.Container.csproj" />
+    <ProjectReference Include="..\..\Container\src\Unity.Container.csproj" />
     <ProjectReference Include="..\src\Unity.Configuration.csproj" />
   </ItemGroup>
 
