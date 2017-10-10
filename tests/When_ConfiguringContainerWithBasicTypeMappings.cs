@@ -66,7 +66,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         {
             Assert.IsTrue(this.container.Registrations
                 .Where(r => r.RegisteredType == typeof(ILogger))
-                .All(r => r.LifetimeManagerType == typeof(TransientLifetimeManager)));
+                .All(r => r.LifetimeManager?.GetType() == typeof(TransientLifetimeManager)));
         }
     }
 }
