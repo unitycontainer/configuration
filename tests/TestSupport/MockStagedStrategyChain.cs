@@ -20,6 +20,7 @@ namespace Microsoft.Practices.Unity.TestSupport
         private readonly object _lockObject = new object();
         private readonly List<IBuilderStrategy>[] _stages;
 
+
         /// <summary>
         /// Initialize a new instance of the <see cref="MockStagedStrategyChain{TStageEnum}"/> class.
         /// </summary>
@@ -42,6 +43,8 @@ namespace Microsoft.Practices.Unity.TestSupport
         {
             _innerChain = innerChain;
         }
+
+        public event EventHandler<EventArgs> Invalidated = delegate(object sender, EventArgs args) {  };
 
         /// <summary>
         /// Adds a strategy to the chain at a particular stage.
@@ -107,6 +110,16 @@ namespace Microsoft.Practices.Unity.TestSupport
         private static int NumberOfEnumValues()
         {
             return typeof(TStageEnum).GetTypeInfo().DeclaredFields.Count(f => f.IsPublic && f.IsStatic);
+        }
+
+        void IStagedStrategyChain<TStageEnum>.Add(IBuilderStrategy strategy, TStageEnum stage)
+        {
+            throw new NotImplementedException();
+        }
+
+        IStrategyChain IStagedStrategyChain.MakeStrategyChain()
+        {
+            throw new NotImplementedException();
         }
     }
 }
