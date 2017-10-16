@@ -1,8 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Unity Configuration</Description>
     <Version>5.0.0-beta</Version>
     <AssemblyVersion>5.0.0.0</AssemblyVersion>
@@ -17,22 +15,14 @@
     <PackageId>Unity.Configuration</PackageId>
     <Authors>Microsoft.Practices.Unity</Authors>
     <Company>Microsoft.Practices.Unity</Company>
+    <Configurations>Debug;Release;Package</Configurations>
   </PropertyGroup>
   
-  <PropertyGroup Condition="Exists('..\..\package.snk')">
+  <PropertyGroup>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>..\..\package.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>package.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
   </PropertyGroup>
-
-  <PropertyGroup>
-    <DebugType Condition="'$(TargetFramework)' != '' AND !$(TargetFramework.StartsWith('netcoreapp'))">Full</DebugType>
-    <RootNamespace>Unity.Configuration</RootNamespace>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Abstractions\src\Unity.Abstractions.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="System.Configuration" />
@@ -51,6 +41,31 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <TargetFrameworks>net47;net45;</TargetFrameworks>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)'=='Package'">
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <TargetFrameworks>net47;net45;</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugType>Full</DebugType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <TargetFramework>net47</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(Configuration)'!='Release'">
+    <ProjectReference Include="..\..\Abstractions\src\Unity.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PackageReference Include="Unity.Abstractions" Version="2.0.0-RC3" />
   </ItemGroup>
 
 </Project>
