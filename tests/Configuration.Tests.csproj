@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
+    <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
+  </ItemGroup>
+   
+  <ItemGroup>
     <None Remove="ConfigFiles\*.config" />
   </ItemGroup>
 
@@ -16,19 +22,21 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Abstractions\src\Unity.Abstractions.csproj" />
-    <ProjectReference Include="..\..\Container\src\Unity.Container.csproj" />
-    <ProjectReference Include="..\src\Unity.Configuration.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="System.Configuration" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\src\Unity.Configuration.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(Configuration)' != 'Release' ">
+    <ProjectReference Include="..\..\Abstractions\src\Unity.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Container\src\Unity.Container.csproj" />
+  </ItemGroup>  
+
+  <ItemGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PackageReference Include="Unity.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Unity.Container" Version="5.0.0" />
+  </ItemGroup>   
+   
 </Project>
