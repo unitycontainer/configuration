@@ -15,7 +15,6 @@
     <PackageId>Unity.Configuration</PackageId>
     <Authors>Microsoft.Practices.Unity</Authors>
     <Company>Microsoft.Practices.Unity</Company>
-    <Configurations>Debug;Release;Package</Configurations>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -46,11 +45,6 @@
   
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <TargetFrameworks>net47;net45;</TargetFrameworks>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition="'$(Configuration)'=='Package'">
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <TargetFrameworks>net47;net45;</TargetFrameworks>
     <OutputPath>$(SolutionDir)\lib\</OutputPath>
   </PropertyGroup>
