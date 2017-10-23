@@ -4,7 +4,6 @@
     <TargetFramework>net47</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Microsoft.Practices.Unity.Configuration.Tests</RootNamespace>
-    <Configurations>Debug;Release;Package</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
