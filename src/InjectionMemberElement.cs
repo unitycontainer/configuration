@@ -44,7 +44,7 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Get the standard tag name for an <see cref="InjectionMemberElement"/>
+        /// GetOrDefault the standard tag name for an <see cref="InjectionMemberElement"/>
         /// taking into account currently loaded section extensions.
         /// </summary>
         /// <param name="memberElement">Element to get the name for.</param>
