@@ -10,7 +10,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
     public static class DictionaryExtensions
     {
         /// <summary>
-        /// Get the value from a dictionary, or null if there is no value.
+        /// GetOrDefault the value from a dictionary, or null if there is no value.
         /// </summary>
         /// <typeparam name="TKey">Key type of dictionary.</typeparam>
         /// <typeparam name="TValue">Value type of dictionary.</typeparam>
