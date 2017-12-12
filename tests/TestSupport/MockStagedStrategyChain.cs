@@ -1,13 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Microsoft.Practices.Unity.TestSupport;
 using Unity.Builder.Strategy;
 using Unity.Strategy;
 
-namespace Microsoft.Practices.Unity.TestSupport
+namespace Microsoft.Practices.Unity.Configuration.Tests.TestSupport
 {
     /// <summary>
     /// Represents a chain of responsibility for builder strategies partitioned by stages.
@@ -43,7 +45,7 @@ namespace Microsoft.Practices.Unity.TestSupport
             _innerChain = innerChain;
         }
 
-        public event EventHandler<EventArgs> Invalidated = delegate(object sender, EventArgs args) {  };
+        public event EventHandler<EventArgs> Invalidated = delegate {  };
 
         /// <summary>
         /// Adds a strategy to the chain at a particular stage.
@@ -111,7 +113,12 @@ namespace Microsoft.Practices.Unity.TestSupport
             return typeof(TStageEnum).GetTypeInfo().DeclaredFields.Count(f => f.IsPublic && f.IsStatic);
         }
 
-        void IStagedStrategyChain<IBuilderStrategy, TStageEnum>.Add(IBuilderStrategy strategy, TStageEnum stage)
+        public IEnumerator<IBuilderStrategy> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
         }
