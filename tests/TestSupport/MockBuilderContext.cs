@@ -100,6 +100,8 @@ namespace Microsoft.Practices.Unity.Configuration.Tests.TestSupport
 
         public BuilderStrategy[] BuildChain => throw new NotImplementedException();
 
+        public IPolicySet Registration => throw new NotImplementedException();
+
         public void AddResolverOverrides(IEnumerable<ResolverOverride> newOverrides)
         {
             resolverOverrides.AddRange(newOverrides);
