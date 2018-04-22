@@ -3,7 +3,7 @@
   <Import Project="..\package.props" />
 
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFrameworks>net47;netcoreapp2.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <RootNamespace>Microsoft.Practices.Unity.Configuration.Tests</RootNamespace>
   </PropertyGroup>
@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\src\Unity.Configuration.csproj" />
   </ItemGroup>
   
@@ -35,11 +31,6 @@
     <UnityAbstractions>..\..\Abstractions\src\Unity.Abstractions.csproj</UnityAbstractions>
     <UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
   </PropertyGroup>
-
-
-  <ItemGroup Condition="Exists('$(UnityAbstractions)')">
-    <ProjectReference Include="$(UnityAbstractions)" />
-  </ItemGroup>
 
   <ItemGroup Condition="Exists('$(UnityContainer)')">
     <ProjectReference Include="$(UnityContainer)" />
@@ -53,5 +44,9 @@
   <ItemGroup Condition="!Exists('$(UnityContainer)')">
     <PackageReference Include="Unity.Container" Version="$(UnityContainerVersion)" />
   </ItemGroup>
-   
+
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+
 </Project>
