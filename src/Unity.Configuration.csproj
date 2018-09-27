@@ -19,7 +19,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>package.snk</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
-    <TargetFrameworks>netstandard2.0;net47;net46;net45;net40;netcoreapp2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net47;net46;net45;netcoreapp2.0</TargetFrameworks>
   </PropertyGroup>
   
   <ItemGroup>
@@ -40,7 +40,6 @@
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <OutputPath>$(SolutionDir)lib</OutputPath>
     <DebugType>Portable</DebugType>
   </PropertyGroup>
 
@@ -51,13 +50,17 @@
 
 
   <PropertyGroup>
-    <UnityAbstractions>..\..\Abstractions\src\Unity.Abstractions.csproj</UnityAbstractions>
+    <UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="$(UnityAbstractions)" Condition="Exists('$(UnityAbstractions)')" />
-    <PackageReference Include="Unity.Abstractions" Version="$(UnityAbstractionsVersion)" Condition="!Exists('$(UnityAbstractions)')" />
+  <ItemGroup Condition="Exists('$(UnityContainer)')">
+    <ProjectReference Include="$(UnityContainer)" />
   </ItemGroup>
+
+  <ItemGroup Condition="!Exists('$(UnityContainer)')">
+    <PackageReference Include="Unity.Container" Version="$(UnityContainerVersion)" />
+  </ItemGroup>
+
 
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netcoreapp2.0'">
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.*" />
