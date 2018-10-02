@@ -1,13 +1,11 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Threading;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -64,7 +62,7 @@ namespace Microsoft.Practices.Unity.Configuration
             {
                 throw new ConfigurationErrorsException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.RequiredPropertyMissing, requiredProperty));
+                        Constants.RequiredPropertyMissing, requiredProperty));
             }
         }
     }

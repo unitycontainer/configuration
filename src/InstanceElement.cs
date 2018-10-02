@@ -30,7 +30,7 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Value for this instance
+        /// InjectionParameterValue for this instance
         /// </summary>
         [ConfigurationProperty(ValuePropertyName, IsRequired = false)]
         public string Value

@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -10,7 +8,7 @@ using System.Threading;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Unity.Injection;
 using Unity.Registration;
 
@@ -154,7 +152,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 string parameterNames = string.Join(", ", this.Parameters.Select(p => p.Name).ToArray());
 
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                    Resources.NoMatchingMethod, typeToInitialize, this.Name, parameterNames));
+                    Constants.NoMatchingMethod, typeToInitialize, this.Name, parameterNames));
             }
         }
     }

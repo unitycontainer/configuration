@@ -63,7 +63,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// given <paramref name="defaultValue"/> instead.
         /// </summary>
         /// <param name="typeNameOrAlias">Type alias or full name to resolve.</param>
-        /// <param name="defaultValue">Value to return if typeName is null or empty.</param>
+        /// <param name="defaultValue">InjectionParameterValue to return if typeName is null or empty.</param>
         /// <returns>The concrete <see cref="Type"/>.</returns>
         /// <exception cref="InvalidOperationException">Thrown if alias lookup fails.</exception>
         public static Type ResolveTypeWithDefault(string typeNameOrAlias, Type defaultValue)
@@ -77,7 +77,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// given <paramref name="defaultValue"/> instead.
         /// </summary>
         /// <param name="typeNameOrAlias">Type alias or full name to resolve.</param>
-        /// <param name="defaultValue">Value to return if typeName is null or empty.</param>
+        /// <param name="defaultValue">InjectionParameterValue to return if typeName is null or empty.</param>
         /// <param name="throwIfResolveFails">if true and the alias does not
         /// resolve, throw an <see cref="InvalidOperationException"/>, otherwise 
         /// return null on failure.</param>

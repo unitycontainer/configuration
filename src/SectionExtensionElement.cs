@@ -1,11 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Microsoft.Practices.Unity.Utility;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -102,13 +100,13 @@ namespace Microsoft.Practices.Unity.Configuration
             if (extensionType == null)
             {
                 throw new ConfigurationErrorsException(string.Format(CultureInfo.CurrentCulture,
-                    Resources.ExtensionTypeNotFound, this.TypeName));
+                    Constants.ExtensionTypeNotFound, this.TypeName));
             }
 
             if (!typeof(SectionExtension).IsAssignableFrom(extensionType))
             {
                 throw new ConfigurationErrorsException(string.Format(CultureInfo.CurrentCulture,
-                    Resources.ExtensionTypeNotValid, this.TypeName));
+                    Constants.ExtensionTypeNotValid, this.TypeName));
             }
         }
 

@@ -1,13 +1,11 @@
-﻿
-
-using System;
+﻿using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Microsoft.Practices.Unity.Utility;
 using Unity;
 using Unity.Injection;
@@ -88,8 +86,8 @@ namespace Microsoft.Practices.Unity.Configuration
             get
             {
                 return string.Format(CultureInfo.CurrentCulture,
-                    Resources.DestinationNameFormat,
-                    Resources.Parameter, this.Name);
+                    Constants.DestinationNameFormat,
+                    Constants.Parameter, this.Name);
             }
         }
 

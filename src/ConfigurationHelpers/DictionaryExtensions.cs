@@ -13,7 +13,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// GetOrDefault the value from a dictionary, or null if there is no value.
         /// </summary>
         /// <typeparam name="TKey">Key type of dictionary.</typeparam>
-        /// <typeparam name="TValue">Value type of dictionary.</typeparam>
+        /// <typeparam name="TValue">InjectionParameterValue type of dictionary.</typeparam>
         /// <param name="dictionary">Dictionary to search.</param>
         /// <param name="key">Key to look up.</param>
         /// <returns>The value at the key or null if not in the dictionary.</returns>

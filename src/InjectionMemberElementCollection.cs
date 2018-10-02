@@ -1,11 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -57,7 +55,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </returns>
         protected override ConfigurationElement CreateNewElement()
         {
-            throw new InvalidOperationException(Resources.CannotCreateInjectionMemberElement);
+            throw new InvalidOperationException(Constants.CannotCreateInjectionMemberElement);
         }
 
         /// <summary>

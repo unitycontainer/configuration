@@ -1,12 +1,10 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Microsoft.Practices.Unity.Utility;
 using Unity;
 using Unity.Injection;
@@ -74,8 +72,8 @@ namespace Microsoft.Practices.Unity.Configuration
             get
             {
                 return string.Format(CultureInfo.CurrentCulture,
-                    Resources.DestinationNameFormat,
-                    Resources.Property, this.Name);
+                    Constants.DestinationNameFormat,
+                    Constants.Property, this.Name);
             }
         }
 
@@ -184,7 +182,7 @@ namespace Microsoft.Practices.Unity.Configuration
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.NoSuchProperty,
+                        Constants.NoSuchProperty,
                         typeContainingProperty.Name, this.Name));
             }
 

@@ -1,13 +1,11 @@
-﻿
-
-using System;
+﻿using System;
 using System.Configuration;
 using System.Globalization;
 using System.Text;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -149,7 +147,7 @@ namespace Microsoft.Practices.Unity.Configuration
             {
                 throw new ArgumentException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.NoSuchContainer, configuredContainerName),
+                        Constants.NoSuchContainer, configuredContainerName),
                     "configuredContainerName");
             }
             return containerElement;
@@ -323,7 +321,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 else
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                        Resources.InvalidExtensionElementType,
+                        Constants.InvalidExtensionElementType,
                         elementType.Name));
                 }
             }

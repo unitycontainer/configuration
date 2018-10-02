@@ -1,12 +1,10 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Microsoft.Practices.Unity.Utility;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -212,7 +210,7 @@ namespace Microsoft.Practices.Unity.Configuration
             {
                 return new ArgumentException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.ElementTypeNotRegistered,
+                        Constants.ElementTypeNotRegistered,
                         elementType), "memberElement");
             }
 

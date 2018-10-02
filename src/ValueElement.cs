@@ -1,13 +1,11 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Unity;
 using Unity.Injection;
 
@@ -47,7 +45,7 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Value for this element
+        /// InjectionParameterValue for this element
         /// </summary>
         [ConfigurationProperty(ValuePropertyName)]
         public string Value
@@ -114,7 +112,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 throw new InvalidOperationException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        Resources.ValueNotAllowedForGenericParameterType,
+                        Constants.ValueNotAllowedForGenericParameterType,
                         parameterType.Name,
                         this.Value));
             }
@@ -126,7 +124,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 throw new InvalidOperationException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        Resources.ValueNotAllowedForOpenGenericType,
+                        Constants.ValueNotAllowedForOpenGenericType,
                         parameterType.Name,
                         this.Value));
             }
@@ -136,7 +134,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 throw new InvalidOperationException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        Resources.ValueNotAllowedForGenericArrayType,
+                        Constants.ValueNotAllowedForGenericArrayType,
                         parameterType.Name,
                         this.Value));
             }

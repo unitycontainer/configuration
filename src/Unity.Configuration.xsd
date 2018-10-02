@@ -43,7 +43,7 @@
   <xs:complexType name="InstanceElement">
     <xs:attribute name="name" type="IdentifierName_Type"/>
     <xs:attribute name="type" type="TypeName_Type"/>
-    <xs:attribute name="value" type="LiteralValue_Type"/>
+    <xs:attribute name="value" type="LiteralInjectionParameterValue_Type"/>
     <xs:attribute name="typeConverter" type="TypeName_Type"/>
   </xs:complexType>
 
@@ -60,7 +60,7 @@
 
   <xs:complexType name="LifetimeElement">
     <xs:attribute name="type" type="LifetimeTypeName_Type" use="required"/>
-    <xs:attribute name="value" type="LiteralValue_Type"/>
+    <xs:attribute name="value" type="LiteralInjectionParameterValue_Type"/>
     <xs:attribute name="typeConverter" type="TypeName_Type"/>
   </xs:complexType>
 
@@ -78,16 +78,16 @@
   </xs:complexType>
 
   <xs:complexType name="PropertyElement">
-    <xs:group ref="ValueResolutionGroup" minOccurs="0"/>
+    <xs:group ref="InjectionParameterValueResolutionGroup" minOccurs="0"/>
     <xs:attribute name="name" type="IdentifierName_Type" use="required"/>
-    <xs:attributeGroup ref="ValueOptimizationAttributes"/>
+    <xs:attributeGroup ref="InjectionParameterValueOptimizationAttributes"/>
   </xs:complexType>
 
   <xs:complexType name="ParameterElement">
-    <xs:group ref="ValueResolutionGroup" minOccurs="0"/>
+    <xs:group ref="InjectionParameterValueResolutionGroup" minOccurs="0"/>
     <xs:attribute name="name" type="IdentifierName_Type"/>
     <xs:attribute name="type" type="TypeName_Type"/>
-    <xs:attributeGroup ref="ValueOptimizationAttributes"/>
+    <xs:attributeGroup ref="InjectionParameterValueOptimizationAttributes"/>
   </xs:complexType>
 
   <xs:complexType name="DependencyElement">
@@ -95,13 +95,13 @@
     <xs:attribute name="type" type="TypeName_Type"/>
   </xs:complexType>
 
-  <xs:complexType name="ValueElement">
-    <xs:attribute name="value" type="LiteralValue_Type"/>
+  <xs:complexType name="InjectionParameterValueElement">
+    <xs:attribute name="value" type="LiteralInjectionParameterValue_Type"/>
     <xs:attribute name="typeConverter" type="TypeName_Type"/>
   </xs:complexType>
 
   <xs:complexType name="ArrayElement">
-    <xs:group ref="ValueResolutionGroup" minOccurs="0" maxOccurs="unbounded"/>
+    <xs:group ref="InjectionParameterValueResolutionGroup" minOccurs="0" maxOccurs="unbounded"/>
     <xs:attribute name="type" type="TypeName_Type"/>
   </xs:complexType>
 
@@ -123,15 +123,15 @@
   </xs:complexType>
 
 
-  <xs:attributeGroup name="ValueOptimizationAttributes">
-    <xs:attribute name="value" type="LiteralValue_Type"/>
+  <xs:attributeGroup name="InjectionParameterValueOptimizationAttributes">
+    <xs:attribute name="value" type="LiteralInjectionParameterValue_Type"/>
     <xs:attribute name="dependencyName" type="IdentifierName_Type"/>
     <xs:attribute name="dependencyType" type="TypeName_Type"/>
   </xs:attributeGroup>
 
-  <xs:group name="ValueResolutionGroup">
+  <xs:group name="InjectionParameterValueResolutionGroup">
     <xs:choice>
-      <xs:element name="value" type="ValueElement"/>
+      <xs:element name="value" type="InjectionParameterValueElement"/>
       <xs:element name="dependency" type="DependencyElement"/>
       <xs:element name="array" type="ArrayElement"/>
       <xs:element name="optional" type="OptionalElement"/>
@@ -211,7 +211,7 @@
       <xs:element name="default" type="DefaultElement"/>
     </xs:choice>
     <xs:attribute name="type" type="InterceptorTypeName_Type"/>
-    <xs:attribute name="value" type="LiteralValue_Type"/>
+    <xs:attribute name="value" type="LiteralInjectionParameterValue_Type"/>
     <xs:attribute name="typeConverter" type="TypeName_Type"/>
   </xs:complexType>
 
@@ -226,7 +226,7 @@
 
   <!-- common types -->
 
-  <xs:simpleType name="LiteralValue_Type">
+  <xs:simpleType name="LiteralInjectionParameterValue_Type">
     <xs:restriction base="xs:string"/>
   </xs:simpleType>
 

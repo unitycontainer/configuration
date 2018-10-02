@@ -1,9 +1,7 @@
-﻿
-
-using System;
+﻿using System;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -68,7 +66,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </returns>
         protected override ConfigurationElement CreateNewElement()
         {
-            throw new InvalidOperationException(Resources.CannotCreateParameterValueElement);
+            throw new InvalidOperationException(Constants.CannotCreateParameterValueElement);
         }
 
         /// <summary>

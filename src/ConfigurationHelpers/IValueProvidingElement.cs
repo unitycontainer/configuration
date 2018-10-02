@@ -3,7 +3,7 @@
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {
     /// <summary>
-    /// An element that has a child Value property.
+    /// An element that has a child InjectionParameterValue property.
     /// </summary>
     public interface IValueProvidingElement
     {

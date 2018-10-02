@@ -1,11 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {
@@ -143,7 +141,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
                 throw new ConfigurationErrorsException(
                     string.Format(
                         CultureInfo.CurrentCulture,
-                        Resources.DuplicateParameterValueElement,
+                        Constants.DuplicateParameterValueElement,
                         parentElement.DestinationName),
                     reader);
             }
@@ -162,7 +160,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
                     throw new ConfigurationErrorsException(
                         string.Format(
                             CultureInfo.CurrentCulture,
-                            Resources.ElementWithAttributesAndParameterValueElements,
+                            Constants.ElementWithAttributesAndParameterValueElements,
                             parentElement.DestinationName),
                         reader);
                 }
@@ -187,7 +185,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
             {
                 throw new ConfigurationErrorsException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.InvalidValueAttributes, parentElement.DestinationName));
+                        Constants.InvalidValueAttributes, parentElement.DestinationName));
             }
         }
 

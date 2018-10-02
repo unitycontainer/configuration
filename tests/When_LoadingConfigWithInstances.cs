@@ -30,7 +30,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         {
             var expected = new[]
                 {
-                    // Name, Value, Type, TypeConverter
+                    // Name, InjectionParameterValue, Type, TypeConverter
                     new[] { String.Empty, "AdventureWorks", String.Empty, String.Empty },
                     new[] { String.Empty, "42", "System.Int32", String.Empty },
                     new[] { "negated", "23", "int", "negator" },

@@ -1,11 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
@@ -103,7 +101,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Resources.CouldNotResolveType, typeNameOrAlias));
+                        Constants.CouldNotResolveType, typeNameOrAlias));
             }
             return resolvedType;
         }
@@ -122,7 +120,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// given <paramref name="defaultValue"/> instead.
         /// </summary>
         /// <param name="typeNameOrAlias">Type alias or full name to resolve.</param>
-        /// <param name="defaultValue">Value to return if typeName is null or empty.</param>
+        /// <param name="defaultValue">InjectionParameterValue to return if typeName is null or empty.</param>
         /// <param name="throwIfResolveFails">if true and the alias does not
         /// resolve, throw an <see cref="InvalidOperationException"/>, otherwise 
         /// return null on failure.</param>

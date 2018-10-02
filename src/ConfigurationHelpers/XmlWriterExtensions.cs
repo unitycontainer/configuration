@@ -44,7 +44,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// </summary>
         /// <param name="writer">Writer to output to.</param>
         /// <param name="attributeName">Attribute name to write.</param>
-        /// <param name="attributeValue">Value for the attribute.</param>
+        /// <param name="attributeValue">InjectionParameterValue for the attribute.</param>
         /// <returns><paramref name="writer"/> (for method chaining if desired).</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
             Justification = "Validation done by Guard class")]

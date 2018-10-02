@@ -1,9 +1,7 @@
-﻿
-
-using System;
+﻿using System;
 using System.Configuration;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Properties;
+using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -21,7 +19,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </returns>
         protected override ConfigurationElement CreateNewElement()
         {
-            throw new InvalidOperationException(Resources.CannotCreateExtensionConfigurationElement);
+            throw new InvalidOperationException(Constants.CannotCreateExtensionConfigurationElement);
         }
 
         /// <summary>
