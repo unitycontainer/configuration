@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Unity.Configuration;
-using Unity.Lifetime;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {

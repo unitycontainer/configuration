@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Unity.Attributes;
-
-#if NET40
+﻿#if NET40
 namespace System.Reflection
 {
     using Unity;
@@ -51,7 +47,7 @@ namespace System.Reflection
 
         public bool IsConstructedGenericType => _type.IsGenericType && !_type.ContainsGenericParameters;
 
-    #region moved over from Type
+#region moved over from Type
 
         //// Fields
 
@@ -117,7 +113,7 @@ namespace System.Reflection
 
         public virtual IEnumerable<Type> ImplementedInterfaces => _type.GetInterfaces();
 
-        #endregion
+#endregion
 
         public override int GetHashCode()
         {
@@ -149,7 +145,6 @@ namespace System.Reflection
 
 namespace Unity
 {
-    using System;
     using System.Reflection;
 
 

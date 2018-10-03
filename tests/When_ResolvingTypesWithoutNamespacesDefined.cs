@@ -1,11 +1,9 @@
-﻿
-
-using System;
-using System.Collections.Generic;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Microsoft.Practices.Unity.TestSupport;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Unity.Lifetime;
+using System;
+using System.Collections.Generic;
+using Unity;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests
 {
