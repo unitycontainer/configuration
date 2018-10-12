@@ -1,14 +1,11 @@
-﻿
-
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
-using Unity.Lifetime;
-using Unity.Registration;
+using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

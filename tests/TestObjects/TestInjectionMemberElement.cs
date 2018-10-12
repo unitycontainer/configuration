@@ -1,12 +1,9 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using Unity;
-using Unity.Registration;
+using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests.TestObjects
 {

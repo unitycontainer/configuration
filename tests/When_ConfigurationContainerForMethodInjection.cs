@@ -68,11 +68,11 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         }
 
         [TestMethod]
-        public void Then_FirstOverloadIsCalledTwice()
+        public void Then_FirstOverloadIsNotCalledTwice()
         {
             var result = Container.Resolve<ObjectWithOverloads>("callFirstOverloadTwice");
 
-            Assert.AreEqual(2, result.FirstOverloadCalls);
+            Assert.AreEqual(1, result.FirstOverloadCalls);
             Assert.AreEqual(0, result.SecondOverloadCalls);
         }
     }

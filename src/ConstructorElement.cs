@@ -9,7 +9,6 @@ using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
 using Unity.Configuration;
 using Unity.Injection;
-using Unity.Registration;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -6,11 +7,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
 using Unity.Configuration;
 using Unity.Injection;
-using Unity.Registration;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
