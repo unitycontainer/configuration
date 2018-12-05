@@ -7,7 +7,6 @@ using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration;
 using Microsoft.Practices.Unity.Utility;
 using Unity;
-using Unity.Injection;
 using Unity.Registration;
 
 namespace Microsoft.Practices.Unity.Configuration

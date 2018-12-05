@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Unity;
-using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests.TestObjects
 {
