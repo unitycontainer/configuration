@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Globalization;
 using Microsoft.Practices.ObjectBuilder2;
 using Unity;
-using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.TestSupport
 {
