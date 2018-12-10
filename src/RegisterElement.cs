@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Xml;
 using Unity;
+using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

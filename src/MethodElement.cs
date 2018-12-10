@@ -9,6 +9,7 @@ using System.Threading;
 using System.Xml;
 using Unity;
 using Unity.Configuration;
+using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

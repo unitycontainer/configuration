@@ -8,6 +8,7 @@ using Unity.Configuration;
 using Microsoft.Practices.Unity.Utility;
 using Unity;
 using Unity.Registration;
+using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
