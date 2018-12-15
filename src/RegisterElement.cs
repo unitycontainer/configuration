@@ -79,7 +79,7 @@ namespace Microsoft.Practices.Unity.Configuration
             Type registeringType = this.GetRegisteringType();
             Type mappedType = this.GetMappedType();
             LifetimeManager lifetime = this.Lifetime.CreateLifetimeManager();
-            IEnumerable<IInjectionMember> injectionMembers =
+            IEnumerable<InjectionMember> injectionMembers =
                 this.InjectionMembers.SelectMany(m => m.GetInjectionMembers(container, registeringType, mappedType, this.Name));
             container.RegisterType(registeringType, mappedType, this.Name, lifetime, injectionMembers.ToArray());
         }
