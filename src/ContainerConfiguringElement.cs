@@ -32,7 +32,7 @@ namespace Microsoft.Practices.Unity.Configuration
 
         internal void ConfigureContainerInternal(IUnityContainer container)
         {
-            this.ConfigureContainer(container);
+            ConfigureContainer(container);
         }
 
         /// <summary>

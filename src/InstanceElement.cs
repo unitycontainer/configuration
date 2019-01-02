@@ -92,7 +92,7 @@ namespace Microsoft.Practices.Unity.Configuration
             Type instanceType = this.GetInstanceType();
             object instanceValue = this.GetInstanceValue();
 
-            container.RegisterInstance(instanceType, this.Name, instanceValue);
+            container.RegisterInstance(instanceType, string.IsNullOrEmpty(Name) ? null : Name, instanceValue);
         }
 
         private Type GetInstanceType()

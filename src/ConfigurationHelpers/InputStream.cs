@@ -1,5 +1,7 @@
 ﻿
 
+using Unity;
+
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {
     /// <summary>
@@ -12,7 +14,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 
         public InputStream(string input)
         {
-            this.input = input ?? string.Empty;
+            this.input = input ?? UnityContainer.All;
         }
 
         public bool AtEnd

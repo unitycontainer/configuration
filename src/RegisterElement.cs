@@ -1,11 +1,10 @@
 ﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Xml;
 using Unity;
-using Unity.Injection;
+using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -65,10 +64,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// this registration.
         /// </summary>
         [ConfigurationProperty(InjectionMembersPropertyName, IsDefaultCollection = true)]
-        public InjectionMemberElementCollection InjectionMembers
-        {
-            get { return (InjectionMemberElementCollection)base[InjectionMembersPropertyName]; }
-        }
+        public InjectionMemberElementCollection InjectionMembers => (InjectionMemberElementCollection)base[InjectionMembersPropertyName];
 
         /// <summary>
         /// Apply the registrations from this element to the given container.
@@ -79,9 +75,15 @@ namespace Microsoft.Practices.Unity.Configuration
             Type registeringType = this.GetRegisteringType();
             Type mappedType = this.GetMappedType();
             LifetimeManager lifetime = this.Lifetime.CreateLifetimeManager();
-            IEnumerable<InjectionMember> injectionMembers =
-                this.InjectionMembers.SelectMany(m => m.GetInjectionMembers(container, registeringType, mappedType, this.Name));
-            container.RegisterType(registeringType, mappedType, this.Name, lifetime, injectionMembers.ToArray());
+            var injectionMembers = InjectionMembers.SelectMany(m => 
+                m.GetInjectionMembers(container, registeringType, mappedType, this.Name)).ToArray();
+
+            var name = injectionMembers.Any(m => m is IDefaultPolicy) 
+                ? UnityContainer.All 
+                : string.IsNullOrEmpty(Name) ? null : Name;
+
+            container.RegisterType(registeringType, mappedType, 
+                name, lifetime, injectionMembers);
         }
 
         /// <summary>
@@ -91,11 +93,9 @@ namespace Microsoft.Practices.Unity.Configuration
         /// calling this method, so deriving classes only need to write the element content, not
         /// the start or end tags.</remarks>
         /// <param name="writer">Writer to send XML content to.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(writer, "writer");
+            Utility.Guard.ArgumentNotNull(writer, "writer");
 
             writer.WriteAttributeString(TypePropertyName, this.TypeName);
             writer.WriteAttributeIfNotEmpty(MapToPropertyName, this.MapToName)
