@@ -42,8 +42,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// directly in this method.</param>
         /// <param name="parameterType">Type of the </param>
         /// <returns></returns>
-        public abstract InjectionParameterValue GetInjectionParameterValue(
-            IUnityContainer container, Type parameterType);
+        public abstract InjectionParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType);
 
         /// <summary>
         /// Validate that an expected attribute is present in the given
@@ -51,8 +50,6 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </summary>
         /// <param name="propertyValues">Dictionary of name/value pairs to check.</param>
         /// <param name="requiredProperty">attribute name to check.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         protected static void GuardPropertyValueIsPresent(IDictionary<string, string> propertyValues, string requiredProperty)
         {
             Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(propertyValues, "propertyValues");
