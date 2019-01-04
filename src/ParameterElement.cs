@@ -92,7 +92,7 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Returns the required <see cref="InjectionParameterValue"/> needed
+        /// Returns the required <see cref="ParameterValue"/> needed
         /// to configure the container so that the correct value is injected.
         /// </summary>
         /// <param name="container">Container being configured.</param>
@@ -100,7 +100,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <returns>The value to use to configure the container.</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
             Justification = "Validation done by Guard class")]
-        public InjectionParameterValue GetParameterValue(IUnityContainer container, Type parameterType)
+        public ParameterValue GetParameterValue(IUnityContainer container, Type parameterType)
         {
             Guard.ArgumentNotNull(parameterType, "parameterType");
 

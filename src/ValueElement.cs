@@ -89,15 +89,15 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Generate an <see cref="InjectionParameterValue"/> object
+        /// Generate an <see cref="ParameterValue"/> object
         /// that will be used to configure the container for a type registration.
         /// </summary>
         /// <param name="container">Container that is being configured. Supplied in order
         /// to let custom implementations retrieve services; do not configure the container
         /// directly in this method.</param>
         /// <param name="parameterType">Type of the parameter to get the value for.</param>
-        /// <returns>The required <see cref="InjectionParameterValue"/> object.</returns>
-        public override InjectionParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
+        /// <returns>The required <see cref="ParameterValue"/> object.</returns>
+        public override ParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
         {
             this.CheckNonGeneric(parameterType);
 

@@ -34,7 +34,7 @@ namespace Microsoft.Practices.Unity.Configuration
         public string Key { get { return string.Format(CultureInfo.InvariantCulture, "value:{0}", this.valueNumber); } }
 
         /// <summary>
-        /// Generate an <see cref="InjectionParameterValue"/> object
+        /// Generate an <see cref="ParameterValue"/> object
         /// that will be used to configure the container for a type registration.
         /// </summary>
         /// <param name="container">Container that is being configured. Supplied in order
@@ -42,7 +42,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// directly in this method.</param>
         /// <param name="parameterType">Type of the </param>
         /// <returns></returns>
-        public abstract InjectionParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType);
+        public abstract ParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType);
 
         /// <summary>
         /// Validate that an expected attribute is present in the given

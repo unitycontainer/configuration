@@ -57,7 +57,7 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Generate an <see cref="InjectionParameterValue"/> object
+        /// Generate an <see cref="ParameterValue"/> object
         /// that will be used to configure the container for a type registration.
         /// </summary>
         /// <param name="container">Container that is being configured. Supplied in order
@@ -65,7 +65,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// directly in this method.</param>
         /// <param name="parameterType">Type of the </param>
         /// <returns></returns>
-        public override InjectionParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
+        public override ParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
         {
             this.GuardTypeIsAnArray(parameterType);
 

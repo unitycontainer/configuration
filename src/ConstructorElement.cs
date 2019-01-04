@@ -103,7 +103,7 @@ namespace Microsoft.Practices.Unity.Configuration
 
         private InjectionMember MakeInjectionMember(IUnityContainer container, ConstructorInfo constructorToCall)
         {
-            var values = new List<InjectionParameterValue>();
+            var values = new List<ParameterValue>();
             var parameterInfos = constructorToCall.GetParameters();
 
             for (int i = 0; i < parameterInfos.Length; ++i)

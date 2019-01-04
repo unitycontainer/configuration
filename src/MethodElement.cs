@@ -115,7 +115,7 @@ namespace Microsoft.Practices.Unity.Configuration
 
         private InjectionMember MakeInjectionMember(IUnityContainer container, MethodInfo methodToCall)
         {
-            var parameterValues = new List<InjectionParameterValue>();
+            var parameterValues = new List<ParameterValue>();
             var parameterInfos = methodToCall.GetParameters();
 
             for (int index = 0; index < parameterInfos.Length; ++index)

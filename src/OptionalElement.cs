@@ -54,7 +54,7 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Generate an <see cref="InjectionParameterValue"/> object
+        /// Generate an <see cref="ParameterValue"/> object
         /// that will be used to configure the container for a type registration.
         /// </summary>
         /// <param name="container">Container that is being configured. Supplied in order
@@ -64,7 +64,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <returns></returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
             Justification = "Validation done by Guard class")]
-        public override InjectionParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
+        public override ParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
         {
             Guard.ArgumentNotNull(parameterType, "parameterType");
 
