@@ -1,12 +1,11 @@
-﻿
-
-using System.Linq;
-using Microsoft.Practices.Unity.Configuration.Tests.ConfigFiles;
+﻿using Microsoft.Practices.Unity.Configuration.Tests.ConfigFiles;
 using Microsoft.Practices.Unity.Configuration.Tests.TestSupport;
 using Microsoft.Practices.Unity.TestSupport;
 using Microsoft.Practices.Unity.TestSupport.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 using Unity;
+using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests
 {

@@ -3,7 +3,7 @@ using Microsoft.Practices.Unity.TestSupport;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using Unity;
+using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests
 {

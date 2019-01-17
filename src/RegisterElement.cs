@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml;
 using Unity;
 using Unity.Configuration;
+using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -50,7 +51,7 @@ namespace Microsoft.Practices.Unity.Configuration
         }
 
         /// <summary>
-        /// Lifetime manager to register for this registration.
+        /// WithLifetime manager to register for this registration.
         /// </summary>
         [ConfigurationProperty(LifetimePropertyName, IsRequired = false)]
         public LifetimeElement Lifetime

@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using Unity.Configuration;
 using Unity;
+using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {

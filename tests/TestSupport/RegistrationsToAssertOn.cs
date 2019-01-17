@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Unity;
-using Unity.Registration;
+using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests.TestSupport
 {
