@@ -8,7 +8,7 @@ using Unity.Lifetime;
 namespace Microsoft.Practices.Unity.TestSupport
 {
     [TypeConverter(typeof(SessionKeyTypeConverter))]
-    public class SessionLifetimeManager : LifetimeManager
+    public class SessionLifetimeManager : LifetimeManager, ITypeLifetimeManager
     {
         private readonly string sessionKey;
         public static string LastUsedSessionKey;
