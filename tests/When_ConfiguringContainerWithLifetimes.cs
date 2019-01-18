@@ -44,7 +44,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         [TestMethod]
         public void Then_MockLoggerHasExternalLifetime()
         {
-            AssertRegistration<ILogger>("mock").HasLifetime<ExternallyControlledLifetimeManager>();
+            AssertRegistration<ILogger>("mock").HasLifetime<TransientLifetimeManager>();
         }
 
         [TestMethod]

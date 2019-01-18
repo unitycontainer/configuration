@@ -84,7 +84,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 : string.IsNullOrEmpty(Name) ? null : Name;
 
             container.RegisterType(registeringType, mappedType, 
-                name, (ITypeLifetimeManager)lifetime, injectionMembers);
+                name, lifetime as ITypeLifetimeManager, injectionMembers);
         }
 
         /// <summary>
