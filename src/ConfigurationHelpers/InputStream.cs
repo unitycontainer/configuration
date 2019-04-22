@@ -14,7 +14,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 
         public InputStream(string input)
         {
-            this.input = input ?? UnityContainer.All;
+            this.input = string.IsNullOrEmpty(input) ? null: input;
         }
 
         public bool AtEnd

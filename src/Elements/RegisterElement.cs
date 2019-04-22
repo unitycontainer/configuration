@@ -80,7 +80,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 m.GetInjectionMembers(container, registeringType, mappedType, this.Name)).ToArray();
 
             var name = injectionMembers.Any(m => m is IDefaultPolicy) 
-                ? UnityContainer.All 
+                ? "UnityContainer.All" 
                 : string.IsNullOrEmpty(Name) ? null : Name;
 
             container.RegisterType(registeringType, mappedType, 
