@@ -1,10 +1,12 @@
 ﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Xml;
 using Unity;
 using Unity.Configuration;
+using Unity.Injection;
 using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -73,14 +75,16 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <param name="container">Container to configure.</param>
         protected override void ConfigureContainer(IUnityContainer container)
         {
-            Type registeringType = this.GetRegisteringType();
-            Type mappedType = this.GetMappedType();
-            LifetimeManager lifetime = this.Lifetime.CreateLifetimeManager();
-            var injectionMembers = InjectionMembers.SelectMany(m => 
-                m.GetInjectionMembers(container, registeringType, mappedType, this.Name)).ToArray();
+            Type registeringType = GetRegisteringType();
+            Type mappedType = GetMappedType();
+            LifetimeManager lifetime = Lifetime.CreateLifetimeManager();
+            var injectionMembers = InjectionMembers.SelectMany(m => m.GetInjectionMembers(container, registeringType, mappedType, this.Name))
+                                                   .ToArray();
+            // TODO: Register default policies
+            // TODO: Then_CanConfigureDefaultInterceptor
 
             var name = injectionMembers.Any(m => m is IDefaultPolicy) 
-                ? "UnityContainer.All" 
+                ? null
                 : string.IsNullOrEmpty(Name) ? null : Name;
 
             container.RegisterType(registeringType, mappedType, 
