@@ -8,8 +8,8 @@ resources:
       endpoint: Unity Container
 
 trigger:
-- master
-- refs/tags/*
+- v5.x
+- refs/tags/v5.*
 
 pool:
   vmImage: 'windows-latest'
