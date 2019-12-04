@@ -3,15 +3,15 @@
   <Import Project="..\package.props" />
 
   <PropertyGroup>
-    <TargetFrameworks>net47;netcoreapp2.0</TargetFrameworks>
+    <TargetFramework>net48</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Microsoft.Practices.Unity.Configuration.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
   </ItemGroup>
    
   <ItemGroup>
@@ -31,7 +31,7 @@
     <ProjectReference Include="..\src\Unity.Configuration.csproj" />
 
     <ProjectReference Include="$(UnityAbstractions)" Condition="Exists('$(UnityAbstractions)')" />
-    <PackageReference Include="Unity.Abstractions" Version="$(UnityAbstractionsVersion)" Condition="!Exists('$(UnityAbstractions)')" />
+    <PackageReference Include="Unity.Abstractions" Version="5.11.1" Condition="!Exists('$(UnityAbstractions)')" />
 
     <ProjectReference Include="$(UnityContainer)" Condition="Exists('$(UnityContainer)')" />
     <PackageReference Include="Unity.Container" Version="$(UnityContainerVersion)" Condition="!Exists('$(UnityContainer)')" />
