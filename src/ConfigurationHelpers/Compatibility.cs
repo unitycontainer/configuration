@@ -2,6 +2,9 @@
 namespace System.Reflection
 {
     using Unity;
+#if NET40
+    using System.Collections.Generic;
+#endif
 
     internal class TypeInfo 
     {
@@ -47,7 +50,7 @@ namespace System.Reflection
 
         public bool IsConstructedGenericType => _type.IsGenericType && !_type.ContainsGenericParameters;
 
-#region moved over from Type
+    #region moved over from Type
 
         //// Fields
 
@@ -113,7 +116,7 @@ namespace System.Reflection
 
         public virtual IEnumerable<Type> ImplementedInterfaces => _type.GetInterfaces();
 
-#endregion
+    #endregion
 
         public override int GetHashCode()
         {
@@ -143,10 +146,13 @@ namespace System.Reflection
 }
 #endif
 
-namespace Unity
+    namespace Unity
 {
+#if NET40
+    using System;
+    using System.Linq;
+#endif
     using System.Reflection;
-
 
     internal static class Compatibility
     {
@@ -159,6 +165,8 @@ namespace Unity
 #endif
 
 #if NET40
+        
+
         public static Attribute GetCustomAttribute(this ParameterInfo parameter, Type type)
         {
             return parameter.GetCustomAttributes(false)
