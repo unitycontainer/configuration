@@ -21,11 +21,11 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
             var aliases = new Dictionary<string, string>
                 {
                     { "dict", typeof(Dictionary<,>).AssemblyQualifiedName },
-                    { "ILogger", "Microsoft.Practices.Unity.TestSupport.ILogger, Configuration.Tests" },
-                    { "MockLogger", "Microsoft.Practices.Unity.TestSupport.MockLogger, Configuration.Tests" }
+                    { "ILogger", "Microsoft.Practices.Unity.TestSupport.ILogger, Unity.Configuration.Tests" },
+                    { "MockLogger", "Microsoft.Practices.Unity.TestSupport.MockLogger, Unity.Configuration.Tests" }
                 };
 
-            var namespaces = new[] { "System", "System.Collections.Generic", "Configuration.Tests" };
+            var namespaces = new[] { "System", "System.Collections.Generic", "Unity.Configuration.Tests" };
             var assemblies = new[] { "System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "Unity.TestSupport", "an invalid assembly name", "invalid, invalid" };
 
             typeResolver = new TypeResolverImpl(aliases, namespaces, assemblies);
