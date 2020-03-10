@@ -70,8 +70,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Section\" />
-  </ItemGroup>
-
 </Project>

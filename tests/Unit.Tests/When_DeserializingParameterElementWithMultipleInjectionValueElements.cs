@@ -30,6 +30,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
         public void Then_DeserializingMultipleInjectionValueChildrenThrows()
         {
             var elementXml = @"
@@ -42,13 +43,11 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
             var result = reader.MoveToContent();
             var element = new ParameterElement();
 
-            AssertExtensions.AssertException<ConfigurationErrorsException>(() =>
-                {
-                    element.Deserialize(reader);
-                });
+            element.Deserialize(reader);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
         public void Then_DeserializingWithParametersAndValueChildrenThrows()
         {
             var elementXml = @"
@@ -59,10 +58,8 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
             var reader = new XmlTextReader(new StringReader(elementXml));
             var result = reader.MoveToContent();
             var element = new ParameterElement();
-            AssertExtensions.AssertException<ConfigurationErrorsException>(() =>
-            {
-                element.Deserialize(reader);
-            });
+
+            element.Deserialize(reader);
         }
     }
 
@@ -88,6 +85,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
         public void Then_DeserializingMultipleInjectionValueChildrenThrows()
         {
             var elementXml = @"
@@ -99,13 +97,11 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
             var reader = new XmlTextReader(new StringReader(elementXml));
             var result = reader.MoveToContent();
             var element = new PropertyElement();
-            AssertExtensions.AssertException<ConfigurationErrorsException>(() =>
-                {
-                    element.Deserialize(reader);
-                });
+            element.Deserialize(reader);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
         public void Then_DeserializingWithParametersAndValueChildrenThrows()
         {
             var elementXml = @"
@@ -116,10 +112,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
             var reader = new XmlTextReader(new StringReader(elementXml));
             var result = reader.MoveToContent();
             var element = new PropertyElement();
-            AssertExtensions.AssertException<ConfigurationErrorsException>(() =>
-                {
-                    element.Deserialize(reader);
-                });
+            element.Deserialize(reader);
         }
     }
 }

@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Unity.Configuration.csproj" />
+    <ProjectReference Include="..\..\src\Unity.Configuration.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +26,15 @@
 
   <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' AND '$(TargetFramework)' != 'netcoreapp2.0'">
     <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Configurations\EmptySection.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Configurations\EmptySection.config" />
+    <EmbeddedResource Include="Configurations\OldContainersSyntax.config" />
   </ItemGroup>
 
 </Project>

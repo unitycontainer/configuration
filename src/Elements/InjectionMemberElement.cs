@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Microsoft.Practices.Unity.Utility;
-using Unity;
+using System;
+using System.Collections.Generic;
 using Unity.Injection;
 
-namespace Microsoft.Practices.Unity.Configuration
+namespace Unity.Configuration
 {
     /// <summary>
     /// Base class for configuration elements that generate <see cref="InjectionMember"/>
@@ -37,7 +36,7 @@ namespace Microsoft.Practices.Unity.Configuration
         {
             get
             {
-                return ExtensionElementMap.GetTagForExtensionElement(this);
+                return Microsoft.Practices.Unity.Configuration.ExtensionElementMap.GetTagForExtensionElement(this);
             }
         }
 

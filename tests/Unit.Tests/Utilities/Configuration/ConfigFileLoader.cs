@@ -3,7 +3,6 @@
 using System;
 using System.Configuration;
 using System.IO;
-using Microsoft.Practices.ObjectBuilder2;
 using System.Linq;
 
 namespace Microsoft.Practices.Unity.TestSupport.Configuration

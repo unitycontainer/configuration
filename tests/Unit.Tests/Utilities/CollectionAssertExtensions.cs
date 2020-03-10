@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -64,6 +65,17 @@ namespace Microsoft.Practices.Unity.TestSupport
                 }
             }
         }
+
+        public static void AssertContainsExactly<TItem>(this IEnumerable<TItem> items, params TItem[] expected)
+        {
+            CollectionAssertExtensions.AreEqual(expected, items.ToArray());
+        }
+
+        public static void AssertContainsInAnyOrder<TItem>(this IEnumerable<TItem> items, params TItem[] expected)
+        {
+            CollectionAssertExtensions.AreEquivalent(expected, items.ToArray());
+        }
+
 
         private static bool AreCollectionsEqual(ICollection expected, ICollection actual, IComparer comparer, out string reason)
         {
