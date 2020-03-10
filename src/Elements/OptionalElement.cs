@@ -4,6 +4,7 @@ using System;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Unity.Configuration
@@ -48,7 +49,7 @@ namespace Unity.Configuration
         public override void SerializeContent(XmlWriter writer)
         {
             writer.WriteAttributeIfNotEmpty(OptionalElement.NamePropertyName, this.Name)
-                .WriteAttributeIfNotEmpty(OptionalElement.TypeNamePropertyName, this.TypeName);
+                  .WriteAttributeIfNotEmpty(OptionalElement.TypeNamePropertyName, this.TypeName);
         }
 
         /// <summary>
@@ -62,7 +63,7 @@ namespace Unity.Configuration
         /// <returns></returns>
         public override ParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
         {
-            Guard.ArgumentNotNull(parameterType, "parameterType");
+            if (null == parameterType) throw new ArgumentNullException(nameof(parameterType));
 
             string dependencyName = this.Name;
             if (string.IsNullOrEmpty(dependencyName))

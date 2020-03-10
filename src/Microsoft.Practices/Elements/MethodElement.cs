@@ -9,6 +9,7 @@ using System.Threading;
 using System.Xml;
 using Unity;
 using Unity.Configuration;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -80,7 +81,7 @@ namespace Microsoft.Practices.Unity.Configuration
             Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
 
             writer.WriteAttributeString(NamePropertyName, this.Name);
             foreach (var param in this.Parameters)

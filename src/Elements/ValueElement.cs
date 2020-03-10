@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Unity.Configuration
@@ -83,7 +84,7 @@ namespace Unity.Configuration
         public override void SerializeContent(XmlWriter writer)
         {
             writer.WriteAttributeIfNotEmpty(ValuePropertyName, this.Value)
-                .WriteAttributeIfNotEmpty(TypeConverterTypeNamePropertyName, this.TypeConverterTypeName);
+                  .WriteAttributeIfNotEmpty(TypeConverterTypeNamePropertyName, this.TypeConverterTypeName);
         }
 
         /// <summary>

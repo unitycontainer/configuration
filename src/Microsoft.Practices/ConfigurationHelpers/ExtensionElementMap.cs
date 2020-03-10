@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration;
-using Microsoft.Practices.Unity.Utility;
+using Unity.Configuration.Extensions;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -119,7 +118,8 @@ namespace Microsoft.Practices.Unity.Configuration
         /// is not registered with the section already.</exception>
         public static string GetTagForExtensionElement(ConfigurationElement element)
         {
-            Guard.ArgumentNotNull(element, "element");
+            if (null == element) throw new ArgumentNullException(nameof(element));
+            
             return Instance.GetTagForExtensionElement(element);
         }
 

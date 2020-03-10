@@ -8,6 +8,7 @@ using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration;
 using Unity;
 using Unity.Injection;
+using Unity.Configuration.Extensions;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -144,7 +145,7 @@ namespace Microsoft.Practices.Unity.Configuration
         {
             if (!string.IsNullOrEmpty(this.TypeConverterTypeName))
             {
-                Type converterType = TypeResolver.ResolveType(this.TypeConverterTypeName);
+                Type converterType = ConfigurationHelpers.TypeResolver.ResolveType(this.TypeConverterTypeName);
                 return (TypeConverter)Activator.CreateInstance(converterType);
             }
             return TypeDescriptor.GetConverter(parameterType);

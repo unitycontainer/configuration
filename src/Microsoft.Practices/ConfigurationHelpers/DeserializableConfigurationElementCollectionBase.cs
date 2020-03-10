@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Extensions;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {

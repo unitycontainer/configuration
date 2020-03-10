@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -10,7 +9,7 @@ namespace Microsoft.Practices.Unity.Configuration
     /// loaded from configuration.
     /// </summary>
     [ConfigurationCollection(typeof(ContainerConfiguringElement))]
-    public class ContainerConfiguringElementCollection : DeserializableConfigurationElementCollectionBase<ContainerConfiguringElement>
+    public class ContainerConfiguringElementCollection : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.DeserializableConfigurationElementCollectionBase<ContainerConfiguringElement>
     {
         /// <summary>
         /// When overridden in a derived class, creates a new <see cref="T:System.Configuration.ConfigurationElement"/>.

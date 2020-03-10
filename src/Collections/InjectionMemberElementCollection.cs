@@ -1,8 +1,8 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Extensions;
 
 namespace Unity.Configuration
 {

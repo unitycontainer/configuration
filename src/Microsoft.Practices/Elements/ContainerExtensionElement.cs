@@ -1,10 +1,7 @@
-﻿
-
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using System;
 using System.Configuration;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Utility;
 using Unity;
 using Unity.Extension;
 
@@ -31,11 +28,9 @@ namespace Microsoft.Practices.Unity.Configuration
         /// Add the extension specified in this element to the container.
         /// </summary>
         /// <param name="container">Container to configure.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         protected override void ConfigureContainer(IUnityContainer container)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(container, "container");
+            if (null == container) throw new ArgumentNullException(nameof(container));
 
             var extensionType = this.GetExtensionType();
             var extension = (UnityContainerExtension)container.Resolve(extensionType);
@@ -49,11 +44,10 @@ namespace Microsoft.Practices.Unity.Configuration
         /// calling this method, so deriving classes only need to write the element content, not
         /// the start or end tags.</remarks>
         /// <param name="writer">Writer to send XML content to.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public override void SerializeContent(System.Xml.XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+            
             writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
         }
 

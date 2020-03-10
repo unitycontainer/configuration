@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration;
-using Microsoft.Practices.Unity.Utility;
 using Unity;
+using Unity.Configuration;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -98,7 +97,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <returns></returns>
         public override ParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
         {
-            Guard.ArgumentNotNull(parameterType, "parameterType");
+            if (null == parameterType) throw new ArgumentNullException(nameof(parameterType));
 
             string dependencyName = this.Name;
             if (string.IsNullOrEmpty(dependencyName))
@@ -121,7 +120,7 @@ namespace Microsoft.Practices.Unity.Configuration
                 return new GenericParameter(parameterType.Name, dependencyName);
             }
 
-            return new ResolvedParameter(TypeResolver.ResolveTypeWithDefault(this.TypeName, parameterType), dependencyName);
+            return new ResolvedParameter(ConfigurationHelpers.TypeResolver.ResolveTypeWithDefault(this.TypeName, parameterType), dependencyName);
         }
 
         private static void SetIfPresent(IDictionary<string, string> attributeValues, string key, Action<string> setter)

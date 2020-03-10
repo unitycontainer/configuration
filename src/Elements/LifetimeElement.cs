@@ -1,6 +1,4 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Utility;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
@@ -72,8 +70,8 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(System.Xml.XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
-
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+            
             writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
             if (!string.IsNullOrEmpty(this.Value))
             {

@@ -1,4 +1,4 @@
-﻿
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests.TestObjects
 {

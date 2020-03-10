@@ -1,6 +1,4 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Utility;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Xml;
 using Unity.Extension;
@@ -30,7 +28,7 @@ namespace Unity.Configuration
         /// <param name="container">Container to configure.</param>
         protected override void ConfigureContainer(IUnityContainer container)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(container, "container");
+            if (null == container) throw new ArgumentNullException(nameof(container));
 
             var extensionType = this.GetExtensionType();
             var extension = (UnityContainerExtension)container.Resolve(extensionType);
@@ -46,7 +44,8 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(System.Xml.XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+
             writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
         }
 

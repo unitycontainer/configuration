@@ -1,11 +1,10 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Utility;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Xml;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Unity.Configuration
@@ -98,7 +97,7 @@ namespace Unity.Configuration
         /// <returns>The value to use to configure the container.</returns>
         public ParameterValue GetParameterValue(IUnityContainer container, Type parameterType)
         {
-            Guard.ArgumentNotNull(parameterType, "parameterType");
+            if (null == parameterType) throw new ArgumentNullException(nameof(parameterType));
 
             Type requiredType = parameterType;
             if (!string.IsNullOrEmpty(this.TypeName))
@@ -121,7 +120,7 @@ namespace Unity.Configuration
         /// <returns>True if this is a match, false if not.</returns>
         public bool Matches(ParameterInfo parameterInfo)
         {
-            Guard.ArgumentNotNull(parameterInfo, "parameterInfo");
+            if (null == parameterInfo) throw new ArgumentNullException(nameof(parameterInfo));
 
             if (this.Name != parameterInfo.Name)
             {
@@ -211,7 +210,8 @@ namespace Unity.Configuration
             Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+
             writer.WriteAttributeString(ParameterElement.NamePropertyName, this.Name);
             writer.WriteAttributeIfNotEmpty(ParameterElement.TypeNamePropertyName, this.TypeName);
             ValueElementHelper.SerializeParameterValueElement(writer, this.Value, false);

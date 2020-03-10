@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml;
 using Unity;
 using Unity.Configuration;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -52,7 +53,7 @@ namespace Microsoft.Practices.Unity.Configuration
             writer.WriteAttributeIfNotEmpty(TypeNamePropertyName, this.TypeName);
             foreach (var valueElement in this.Values)
             {
-                ValueElementHelper.SerializeParameterValueElement(writer, valueElement, true);
+                Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper.SerializeParameterValueElement(writer, valueElement, true);
             }
         }
 
@@ -94,7 +95,7 @@ namespace Microsoft.Practices.Unity.Configuration
 
         private Type GetElementType(Type parameterType)
         {
-            return TypeResolver.ResolveTypeWithDefault(this.TypeName, null) ?? parameterType.GetElementType();
+            return ConfigurationHelpers.TypeResolver.ResolveTypeWithDefault(this.TypeName, null) ?? parameterType.GetElementType();
         }
     }
 }

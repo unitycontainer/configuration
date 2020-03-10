@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 
 namespace Unity.Configuration
 {

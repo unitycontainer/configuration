@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -9,7 +8,7 @@ namespace Microsoft.Practices.Unity.Configuration
     /// A collection of <see cref="ExtensionConfigurationElement"/>s.
     /// </summary>
     [ConfigurationCollection(typeof(ExtensionConfigurationElement))]
-    public class ExtensionConfigurationElementCollection : DeserializableConfigurationElementCollectionBase<ExtensionConfigurationElement>
+    public class ExtensionConfigurationElementCollection : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.DeserializableConfigurationElementCollectionBase<ExtensionConfigurationElement>
     {
         /// <summary>
         /// When overridden in a derived class, creates a new <see cref="T:System.Configuration.ConfigurationElement"/>.

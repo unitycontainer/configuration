@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration;
-using Microsoft.Practices.Unity.Utility;
 using Unity;
-using Unity.Registration;
+using Unity.Configuration;
 using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -15,10 +12,10 @@ namespace Microsoft.Practices.Unity.Configuration
     /// <summary>
     /// A class representing a property configuration element.
     /// </summary>
-    public class PropertyElement : InjectionMemberElement, IValueProvidingElement
+    public class PropertyElement : InjectionMemberElement, Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.IValueProvidingElement
     {
         private const string NamePropertyName = "name";
-        private readonly ValueElementHelper valueElementHelper;
+        private readonly Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper valueElementHelper;
         private ParameterValueElement valueElement;
 
         /// <summary>
@@ -26,7 +23,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </summary>
         public PropertyElement()
         {
-            this.valueElementHelper = new ValueElementHelper(this);
+            this.valueElementHelper = new Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper(this);
         }
 
         /// <summary>
@@ -52,11 +49,11 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </summary>
         public ParameterValueElement Value
         {
-            get { return ValueElementHelper.GetValue(this.valueElement); }
+            get { return Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper.GetValue(this.valueElement); }
             set { this.valueElement = value; }
         }
 
-        ParameterValueElement IValueProvidingElement.Value
+        ParameterValueElement Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.IValueProvidingElement.Value
         {
             get { return this.valueElement; }
             set { this.Value = value; }
@@ -155,9 +152,10 @@ namespace Microsoft.Practices.Unity.Configuration
             Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+
             writer.WriteAttributeString(NamePropertyName, this.Name);
-            ValueElementHelper.SerializeParameterValueElement(writer, this.Value, false);
+            Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper.SerializeParameterValueElement(writer, this.Value, false);
         }
 
         /// <summary>

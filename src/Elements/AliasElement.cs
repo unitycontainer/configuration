@@ -7,7 +7,7 @@ namespace Unity.Configuration
     /// <summary>
     /// A configuration element storing information about a single type alias.
     /// </summary>
-    public class AliasElement : ConfigurationElement
+    public class AliasElement : DeserializableConfigurationElement
     {
         private const string AliasPropertyName = "alias";
         private const string TypeNamePropertyName = "type";
@@ -27,8 +27,10 @@ namespace Unity.Configuration
         /// <param name="targetType">Type that is aliased.</param>
         public AliasElement(string alias, Type targetType)
         {
-            Alias = alias;
-            TypeName = (targetType ?? throw new ArgumentNullException(nameof(targetType))).AssemblyQualifiedName;
+            if (null == targetType) throw new ArgumentNullException(nameof(targetType));
+
+            this.Alias = alias;
+            this.TypeName = targetType.AssemblyQualifiedName;
         }
 
         /// <summary>
@@ -58,13 +60,12 @@ namespace Unity.Configuration
         /// calling this method, so deriving classes only need to write the element content, not
         /// the start or end tags.</remarks>
         /// <param name="writer">Writer to send XML content to.</param>
-        
-        //public override void SerializeContent(XmlWriter writer)
-        //{
-        //    if (null == writer) throw new ArgumentNullException(nameof(writer));
+        public override void SerializeContent(XmlWriter writer)
+        {
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
             
-        //    writer.WriteAttributeString(AliasPropertyName, this.Alias);
-        //    writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
-        //}
+            writer.WriteAttributeString(AliasPropertyName, this.Alias);
+            writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
+        }
     }
 }

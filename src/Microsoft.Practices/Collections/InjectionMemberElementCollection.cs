@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration;
+using Unity.Configuration.Extensions;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -11,7 +12,7 @@ namespace Microsoft.Practices.Unity.Configuration
     /// A polymorphic collection of <see cref="InjectionMemberElement"/>s.
     /// </summary>
     [ConfigurationCollection(typeof(InjectionMemberElement))]
-    public class InjectionMemberElementCollection : DeserializableConfigurationElementCollectionBase<InjectionMemberElement>
+    public class InjectionMemberElementCollection : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.DeserializableConfigurationElementCollectionBase<InjectionMemberElement>
     {
         private readonly Dictionary<string, Type> elementTypeMap = new Dictionary<string, Type>
             {

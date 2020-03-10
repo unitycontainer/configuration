@@ -1,8 +1,5 @@
-﻿
-
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using System.Configuration;
-using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 
 namespace Microsoft.Practices.Unity.Configuration
 {

@@ -4,10 +4,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration;
-using Microsoft.Practices.Unity.Utility;
 using Unity;
+using Unity.Configuration;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -16,12 +15,12 @@ namespace Microsoft.Practices.Unity.Configuration
     /// Configuration element representing a parameter passed to a constructor
     /// or a method.
     /// </summary>
-    public class ParameterElement : DeserializableConfigurationElement, IValueProvidingElement
+    public class ParameterElement : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.DeserializableConfigurationElement, Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.IValueProvidingElement
     {
         private const string NamePropertyName = "name";
         private const string TypeNamePropertyName = "type";
 
-        private readonly ValueElementHelper valueElementHelper;
+        private readonly Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper valueElementHelper;
         private ParameterValueElement valueElement;
 
         /// <summary>
@@ -29,7 +28,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </summary>
         public ParameterElement()
         {
-            this.valueElementHelper = new ValueElementHelper(this);
+            this.valueElementHelper = new Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper(this);
         }
 
         /// <summary>
@@ -66,11 +65,11 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <see cref="OnDeserializeUnrecognizedElement"/>.</remarks>
         public ParameterValueElement Value
         {
-            get { return ValueElementHelper.GetValue(this.valueElement); }
+            get { return Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper.GetValue(this.valueElement); }
             set { this.valueElement = value; }
         }
 
-        ParameterValueElement IValueProvidingElement.Value
+        ParameterValueElement Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.IValueProvidingElement.Value
         {
             get { return this.valueElement; }
             set { this.Value = value; }
@@ -98,11 +97,9 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <param name="container">Container being configured.</param>
         /// <param name="parameterType">Type of the parameter.</param>
         /// <returns>The value to use to configure the container.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public ParameterValue GetParameterValue(IUnityContainer container, Type parameterType)
         {
-            Guard.ArgumentNotNull(parameterType, "parameterType");
+            if (null == parameterType) throw new ArgumentNullException(nameof(parameterType));
 
             Type requiredType = parameterType;
             if (!string.IsNullOrEmpty(this.TypeName))
@@ -112,7 +109,7 @@ namespace Microsoft.Practices.Unity.Configuration
                     "parameterType shouldn't be a generic parameter if TypeName is not null, because the " +
                     "TypeName is used to match the method parameter when present.");
 
-                requiredType = TypeResolver.ResolveType(this.TypeName);
+                requiredType = ConfigurationHelpers.TypeResolver.ResolveType(this.TypeName);
             }
             return this.Value.GetInjectionParameterValue(container, requiredType);
         }
@@ -123,11 +120,9 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </summary>
         /// <param name="parameterInfo">Information about the parameter.</param>
         /// <returns>True if this is a match, false if not.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public bool Matches(ParameterInfo parameterInfo)
         {
-            Guard.ArgumentNotNull(parameterInfo, "parameterInfo");
+            if (null == parameterInfo) throw new ArgumentNullException(nameof(parameterInfo));
 
             if (this.Name != parameterInfo.Name)
             {
@@ -136,7 +131,7 @@ namespace Microsoft.Practices.Unity.Configuration
 
             if (!string.IsNullOrEmpty(this.TypeName))
             {
-                Type parameterElementType = TypeResolver.ResolveType(this.TypeName);
+                Type parameterElementType = ConfigurationHelpers.TypeResolver.ResolveType(this.TypeName);
                 return parameterElementType == parameterInfo.ParameterType;
             }
 
@@ -217,10 +212,11 @@ namespace Microsoft.Practices.Unity.Configuration
             Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+
             writer.WriteAttributeString(ParameterElement.NamePropertyName, this.Name);
             writer.WriteAttributeIfNotEmpty(ParameterElement.TypeNamePropertyName, this.TypeName);
-            ValueElementHelper.SerializeParameterValueElement(writer, this.Value, false);
+            Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper.SerializeParameterValueElement(writer, this.Value, false);
         }
     }
 }

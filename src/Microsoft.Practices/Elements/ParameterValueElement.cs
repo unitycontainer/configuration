@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Threading;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
 using Unity.Configuration;
 using Unity.Injection;
@@ -14,7 +13,7 @@ namespace Microsoft.Practices.Unity.Configuration
     /// Base class for configuration elements that describe a value that will
     /// be injected.
     /// </summary>
-    public abstract class ParameterValueElement : DeserializableConfigurationElement
+    public abstract class ParameterValueElement : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.DeserializableConfigurationElement
     {
         private static int valueElementCount;
         private readonly int valueNumber;
@@ -52,7 +51,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <param name="requiredProperty">attribute name to check.</param>
         protected static void GuardPropertyValueIsPresent(IDictionary<string, string> propertyValues, string requiredProperty)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(propertyValues, "propertyValues");
+            if (null == propertyValues) throw new ArgumentNullException(nameof(propertyValues));
 
             if (!propertyValues.ContainsKey(requiredProperty) ||
                 string.IsNullOrEmpty(propertyValues[requiredProperty]))

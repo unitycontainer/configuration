@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Globalization;
 using System.Xml;
 using Unity.Configuration;
+using Unity.Configuration.Extensions;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {

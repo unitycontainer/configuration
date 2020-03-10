@@ -1,6 +1,4 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Unity.Injection;
 
@@ -50,7 +48,8 @@ namespace Unity.Configuration
         /// with the section.</exception>
         public static string GetMemberElementName(InjectionMemberElement memberElement)
         {
-            Guard.ArgumentNotNull(memberElement, "memberElement");
+            if (null == memberElement) throw new ArgumentNullException(nameof(memberElement));
+
             return memberElement.ElementName;
         }
     }

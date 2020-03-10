@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Unity.Configuration

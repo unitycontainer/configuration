@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
+using Unity.Configuration.Extensions;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -78,9 +79,9 @@ namespace Microsoft.Practices.Unity.Configuration
         public override void SerializeContent(XmlWriter writer)
         {
             writer.WriteAttributeIfNotEmpty(InstanceElement.NamePropertyName, this.Name)
-                .WriteAttributeIfNotEmpty(InstanceElement.ValuePropertyName, this.Value)
-                .WriteAttributeIfNotEmpty(InstanceElement.TypeNamePropertyName, this.TypeName)
-                .WriteAttributeIfNotEmpty(InstanceElement.TypeConverterTypeNamePropertyName, this.TypeConverterTypeName);
+                  .WriteAttributeIfNotEmpty(InstanceElement.ValuePropertyName, this.Value)
+                  .WriteAttributeIfNotEmpty(InstanceElement.TypeNamePropertyName, this.TypeName)
+                  .WriteAttributeIfNotEmpty(InstanceElement.TypeConverterTypeNamePropertyName, this.TypeConverterTypeName);
         }
 
         /// <summary>

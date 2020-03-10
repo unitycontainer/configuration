@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Utility;
-using Unity;
 using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -75,7 +73,7 @@ namespace Microsoft.Practices.Unity.Configuration
             Justification = "Validation done by Guard class")]
         public override void SerializeContent(System.Xml.XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
 
             writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
             if (!string.IsNullOrEmpty(this.Value))

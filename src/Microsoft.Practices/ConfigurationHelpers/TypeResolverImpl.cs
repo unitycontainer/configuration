@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Unity.Configuration;
-using Unity;
+using Unity.Configuration.Extensions;
 using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
@@ -70,7 +70,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         public TypeResolverImpl(IEnumerable<KeyValuePair<string, string>> aliasesSequence,
             IEnumerable<string> namespaces, IEnumerable<string> assemblies)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(aliasesSequence, "aliasesSequence");
+            if (null == aliasesSequence) throw new ArgumentNullException(nameof(aliasesSequence));
 
             aliases = new Dictionary<string, string>();
             foreach (var pair in aliasesSequence)

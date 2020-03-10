@@ -1,5 +1,4 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -50,7 +49,7 @@ namespace Unity.Configuration
         /// <param name="requiredProperty">attribute name to check.</param>
         protected static void GuardPropertyValueIsPresent(IDictionary<string, string> propertyValues, string requiredProperty)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(propertyValues, "propertyValues");
+            if (null == propertyValues) throw new ArgumentNullException(nameof(propertyValues));
 
             if (!propertyValues.ContainsKey(requiredProperty) ||
                 string.IsNullOrEmpty(propertyValues[requiredProperty]))

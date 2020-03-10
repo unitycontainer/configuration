@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Configuration;
 using System.Xml;
 using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
@@ -29,11 +27,9 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </summary>
         /// <param name="alias">Alias to use.</param>
         /// <param name="targetType">Type that is aliased.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public AliasElement(string alias, Type targetType)
         {
-            Guard.ArgumentNotNull(targetType, "targetType");
+            if (null == targetType) throw new ArgumentNullException(nameof(targetType));
 
             this.Alias = alias;
             this.TypeName = targetType.AssemblyQualifiedName;
@@ -70,7 +66,8 @@ namespace Microsoft.Practices.Unity.Configuration
             Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+
             writer.WriteAttributeString(AliasPropertyName, this.Alias);
             writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
         }

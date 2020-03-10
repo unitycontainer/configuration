@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Configuration;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration;
 
 namespace Microsoft.Practices.Unity.Configuration
@@ -8,9 +7,9 @@ namespace Microsoft.Practices.Unity.Configuration
     /// <summary>
     /// A collection of <see cref="ParameterValueElement"/> objects.
     /// </summary>
-    public class ParameterValueElementCollection : DeserializableConfigurationElementCollectionBase<ParameterValueElement>
+    public class ParameterValueElementCollection : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.DeserializableConfigurationElementCollectionBase<ParameterValueElement>
     {
-        private class DeserializedElementHolder : IValueProvidingElement
+        private class DeserializedElementHolder : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.IValueProvidingElement
         {
             private ParameterValueElement ValueElement { get; set; }
 
@@ -47,7 +46,7 @@ namespace Microsoft.Practices.Unity.Configuration
         protected override bool OnDeserializeUnrecognizedElement(string elementName, System.Xml.XmlReader reader)
         {
             var holder = new DeserializedElementHolder();
-            var helper = new ValueElementHelper(holder);
+            var helper = new Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.ValueElementHelper(holder);
 
             if (helper.DeserializeUnknownElement(elementName, reader))
             {

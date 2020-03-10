@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Extensions;
 
 namespace Unity.Configuration
 {
@@ -75,9 +76,9 @@ namespace Unity.Configuration
         public override void SerializeContent(XmlWriter writer)
         {
             writer.WriteAttributeIfNotEmpty(InstanceElement.NamePropertyName, this.Name)
-                .WriteAttributeIfNotEmpty(InstanceElement.ValuePropertyName, this.Value)
-                .WriteAttributeIfNotEmpty(InstanceElement.TypeNamePropertyName, this.TypeName)
-                .WriteAttributeIfNotEmpty(InstanceElement.TypeConverterTypeNamePropertyName, this.TypeConverterTypeName);
+                  .WriteAttributeIfNotEmpty(InstanceElement.ValuePropertyName, this.Value)
+                  .WriteAttributeIfNotEmpty(InstanceElement.TypeNamePropertyName, this.TypeName)
+                  .WriteAttributeIfNotEmpty(InstanceElement.TypeConverterTypeNamePropertyName, this.TypeConverterTypeName);
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Linq;
 using System.Xml;
 using Unity;
+using Unity.Configuration.Extensions;
 using Unity.Lifetime;
 
 namespace Unity.Configuration
@@ -101,7 +102,7 @@ namespace Unity.Configuration
 
             writer.WriteAttributeString(TypePropertyName, this.TypeName);
             writer.WriteAttributeIfNotEmpty(MapToPropertyName, this.MapToName)
-                .WriteAttributeIfNotEmpty(NamePropertyName, this.Name);
+                  .WriteAttributeIfNotEmpty(NamePropertyName, this.Name);
 
             if (!string.IsNullOrEmpty(this.Lifetime.TypeName))
             {

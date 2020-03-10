@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Xml;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 
 namespace Unity.Configuration
@@ -76,7 +77,7 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
 
             writer.WriteAttributeString(NamePropertyName, this.Name);
             foreach (var param in Parameters)

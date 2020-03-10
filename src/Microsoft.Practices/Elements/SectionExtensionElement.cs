@@ -12,12 +12,12 @@ namespace Microsoft.Practices.Unity.Configuration
     /// A configuration element used to specify which extensions to
     /// add to the configuration schema.
     /// </summary>
-    public class SectionExtensionElement : DeserializableConfigurationElement
+    public class SectionExtensionElement : Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.DeserializableConfigurationElement
     {
         private const string TypeNamePropertyName = "type";
         private const string PrefixPropertyName = "prefix";
 
-        private SectionExtension extensionObject;
+        private ConfigurationHelpers.SectionExtension extensionObject;
 
         /// <summary>
         /// Type of the section extender object that will provide new elements to the schema.
@@ -83,11 +83,11 @@ namespace Microsoft.Practices.Unity.Configuration
         /// calling this method, so deriving classes only need to write the element content, not
         /// the start or end tags.</remarks>
         /// <param name="writer">Writer to send XML content to.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
-            Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
+
+            
             writer.WriteAttributeString(SectionExtensionElement.TypeNamePropertyName, this.TypeName);
             if (!string.IsNullOrEmpty(this.Prefix))
             {
@@ -112,7 +112,7 @@ namespace Microsoft.Practices.Unity.Configuration
 
         private Type GetExtensionObjectType()
         {
-            Type extensionType = TypeResolver.ResolveType(this.TypeName);
+            Type extensionType = ConfigurationHelpers.TypeResolver.ResolveType(this.TypeName);
             this.GuardIsValidExtensionType(extensionType);
             return extensionType;
         }

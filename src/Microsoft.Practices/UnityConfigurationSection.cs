@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+using System;
 using System.Configuration;
 using System.Globalization;
 using System.Text;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
 using Unity.Configuration;
 
@@ -31,8 +31,8 @@ namespace Microsoft.Practices.Unity.Configuration
         private const string AssembliesPropertyName = "assemblies";
         private const string XmlnsPropertyName = "xmlns";
 
-        private static readonly UnknownElementHandlerMap<UnityConfigurationSection> UnknownElementHandlerMap
-            = new UnknownElementHandlerMap<UnityConfigurationSection>
+        private static readonly ConfigurationHelpers.UnknownElementHandlerMap<UnityConfigurationSection> UnknownElementHandlerMap
+            = new ConfigurationHelpers.UnknownElementHandlerMap<UnityConfigurationSection>
                 {
                     { "typeAliases", (s, xr) => s.TypeAliases.Deserialize(xr) },
                     { "containers", (s, xr) => s.Containers.Deserialize(xr) },
@@ -134,7 +134,7 @@ namespace Microsoft.Practices.Unity.Configuration
         public IUnityContainer Configure(IUnityContainer container, string configuredContainerName)
         {
             currentSection = this;
-            TypeResolver.SetAliases(this);
+            Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.TypeResolver.SetAliases(this);
             var containerElement = GuardContainerExists(configuredContainerName, this.Containers[configuredContainerName]);
 
             containerElement.ConfigureContainer(container);
@@ -196,7 +196,7 @@ namespace Microsoft.Practices.Unity.Configuration
 
         private void DeserializeSectionExtension(XmlReader reader)
         {
-            TypeResolver.SetAliases(this);
+            Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.TypeResolver.SetAliases(this);
             var element = this.ReadUnwrappedElement(reader, this.SectionExtensions);
             element.ExtensionObject.AddExtensions(new ExtensionContext(this, element.Prefix));
         }
@@ -214,7 +214,7 @@ namespace Microsoft.Practices.Unity.Configuration
         {
             ExtensionElementMap.Clear();
             currentSection = this;
-            TypeResolver.SetAliases(this);
+            Microsoft.Practices.Unity.Configuration.ConfigurationHelpers.TypeResolver.SetAliases(this);
             this.InitializeSectionExtensions();
 
             var sb = new StringBuilder();
@@ -249,12 +249,12 @@ namespace Microsoft.Practices.Unity.Configuration
         {
             foreach (var extensionElement in this.SectionExtensions)
             {
-                SectionExtension extensionObject = extensionElement.ExtensionObject;
+                ConfigurationHelpers.SectionExtension extensionObject = extensionElement.ExtensionObject;
                 extensionObject.AddExtensions(new ExtensionContext(this, extensionElement.Prefix, false));
             }
         }
 
-        private class ExtensionContext : SectionExtensionContext
+        private class ExtensionContext : ConfigurationHelpers.SectionExtensionContext
         {
             private readonly UnityConfigurationSection section;
             private readonly string prefix;
@@ -300,11 +300,9 @@ namespace Microsoft.Practices.Unity.Configuration
             /// </summary>
             /// <param name="tag">Tag name in the XML.</param>
             /// <param name="elementType">Type the tag maps to.</param>
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-                Justification = "Validation done by Guard class")]
             public override void AddElement(string tag, Type elementType)
             {
-                Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(elementType, "elementType");
+                if (null == elementType) throw new ArgumentNullException(nameof(elementType));
 
                 if (typeof(ContainerConfiguringElement).IsAssignableFrom(elementType))
                 {

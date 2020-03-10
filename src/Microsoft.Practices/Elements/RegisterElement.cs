@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml;
 using Unity;
 using Unity.Configuration;
+using Unity.Configuration.Extensions;
 using Unity.Injection;
 using Unity.Lifetime;
 
@@ -100,7 +101,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            Utility.Guard.ArgumentNotNull(writer, "writer");
+            if (null == writer) throw new ArgumentNullException(nameof(writer));
 
             writer.WriteAttributeString(TypePropertyName, this.TypeName);
             writer.WriteAttributeIfNotEmpty(MapToPropertyName, this.MapToName)
@@ -118,7 +119,7 @@ namespace Microsoft.Practices.Unity.Configuration
         {
             if (!string.IsNullOrEmpty(this.MapToName))
             {
-                return TypeResolver.ResolveType(this.TypeName);
+                return ConfigurationHelpers.TypeResolver.ResolveType(this.TypeName);
             }
             return null;
         }
@@ -127,9 +128,9 @@ namespace Microsoft.Practices.Unity.Configuration
         {
             if (string.IsNullOrEmpty(this.MapToName))
             {
-                return TypeResolver.ResolveType(this.TypeName);
+                return ConfigurationHelpers.TypeResolver.ResolveType(this.TypeName);
             }
-            return TypeResolver.ResolveType(this.MapToName);
+            return ConfigurationHelpers.TypeResolver.ResolveType(this.MapToName);
         }
 
         private void SerializeInjectionMembers(XmlWriter writer)
