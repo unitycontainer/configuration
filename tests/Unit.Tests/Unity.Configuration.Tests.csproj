@@ -25,12 +25,16 @@
 
   <ItemGroup>
     <None Remove="Configurations\EmptySection.config" />
+    <None Remove="Configurations\Fields.config" />
+    <None Remove="Configurations\Test-Section.config" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Configurations\ArrayInjection.config" />
     <EmbeddedResource Include="Configurations\BasicTypeMapping.config" />
     <EmbeddedResource Include="Configurations\ContainerExtensions.config" />
+    <EmbeddedResource Include="Configurations\Fields.config" />
+    <EmbeddedResource Include="Configurations\Test-Section.config" />
     <EmbeddedResource Include="Configurations\EmptySection.config" />
     <EmbeddedResource Include="Configurations\Generics.config" />
     <EmbeddedResource Include="Configurations\InjectingGenerics.config" />

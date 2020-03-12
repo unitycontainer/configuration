@@ -1,9 +1,10 @@
-﻿using Microsoft.Practices.Unity.Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Injection;
 
 namespace Unity.Configuration
@@ -22,7 +23,7 @@ namespace Unity.Configuration
         /// </summary>
         public PropertyElement()
         {
-            this.valueElementHelper = new ValueElementHelper(this);
+            valueElementHelper = new ValueElementHelper(this);
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace Unity.Configuration
         /// </summary>
         public override string Key
         {
-            get { return "property:" + this.Name; }
+            get { return "property:" + Name; }
         }
 
         /// <summary>
@@ -48,14 +49,14 @@ namespace Unity.Configuration
         /// </summary>
         public ParameterValueElement Value
         {
-            get { return ValueElementHelper.GetValue(this.valueElement); }
-            set { this.valueElement = value; }
+            get { return ValueElementHelper.GetValue(valueElement); }
+            set { valueElement = value; }
         }
 
         ParameterValueElement IValueProvidingElement.Value
         {
-            get { return this.valueElement; }
-            set { this.Value = value; }
+            get { return valueElement; }
+            set { Value = value; }
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace Unity.Configuration
             {
                 return string.Format(CultureInfo.CurrentCulture,
                     Constants.DestinationNameFormat,
-                    Constants.Property, this.Name);
+                    Constants.Property, Name);
             }
         }
 
@@ -95,7 +96,7 @@ namespace Unity.Configuration
         protected override void DeserializeElement(System.Xml.XmlReader reader, bool serializeCollectionKey)
         {
             base.DeserializeElement(reader, serializeCollectionKey);
-            this.valueElementHelper.CompleteValueElement(reader);
+            valueElementHelper.CompleteValueElement(reader);
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace Unity.Configuration
         /// <param name="value">The value of the unrecognized attribute.</param>
         protected override bool OnDeserializeUnrecognizedAttribute(string name, string value)
         {
-            return this.valueElementHelper.DeserializeUnrecognizedAttribute(name, value);
+            return valueElementHelper.DeserializeUnrecognizedAttribute(name, value);
         }
 
         /// <summary>
@@ -136,7 +137,7 @@ namespace Unity.Configuration
         protected override bool OnDeserializeUnrecognizedElement(string elementName, System.Xml.XmlReader reader)
         {
             return
-                this.valueElementHelper.DeserializeUnknownElement(elementName, reader) ||
+                valueElementHelper.DeserializeUnknownElement(elementName, reader) ||
                 base.OnDeserializeUnrecognizedElement(elementName, reader);
         }
 
@@ -147,14 +148,12 @@ namespace Unity.Configuration
         /// calling this method, so deriving classes only need to write the element content, not
         /// the start or end tags.</remarks>
         /// <param name="writer">Writer to send XML content to.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
             if (null == writer) throw new ArgumentNullException(nameof(writer));
 
-            writer.WriteAttributeString(NamePropertyName, this.Name);
-            ValueElementHelper.SerializeParameterValueElement(writer, this.Value, false);
+            writer.WriteAttributeString(NamePropertyName, Name);
+            ValueElementHelper.SerializeParameterValueElement(writer, Value, false);
         }
 
         /// <summary>
@@ -169,18 +168,18 @@ namespace Unity.Configuration
         /// applied to the container registration.</returns>
         public override IEnumerable<InjectionMember> GetInjectionMembers(IUnityContainer container, Type fromType, Type toType, string name)
         {
-            return new[] { new InjectionProperty(this.Name, this.Value.GetInjectionParameterValue(container, this.GetPropertyType(toType))) };
+            return new[] { new InjectionProperty(Name, Value.GetInjectionParameterValue(container, GetPropertyType(toType))) };
         }
 
         private Type GetPropertyType(Type typeContainingProperty)
         {
-            var propertyInfo = typeContainingProperty.GetProperty(this.Name);
+            var propertyInfo = typeContainingProperty.GetProperty(Name);
             if (propertyInfo == null)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.CurrentCulture,
                         Constants.NoSuchProperty,
-                        typeContainingProperty.Name, this.Name));
+                        typeContainingProperty.Name, Name));
             }
 
             return propertyInfo.PropertyType;

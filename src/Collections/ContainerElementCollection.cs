@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Unity.Configuration.Abstractions;
 
 namespace Unity.Configuration
 {
@@ -8,7 +9,7 @@ namespace Unity.Configuration
     [ConfigurationCollection(typeof(ContainerElement), AddItemName = "container")]
     public class ContainerElementCollection : DeserializableConfigurationElementCollection<ContainerElement>
     {
-        internal UnityConfigurationSection ContainingSection { get; set; }
+        internal ConfigurationSection ContainingSection { get; set; }
 
         /// <summary>
         /// Retrieve a stored <see cref="ContainerElement"/> by name.
@@ -17,7 +18,7 @@ namespace Unity.Configuration
         /// <returns>The stored container or null if not in the collection.</returns>
         public new ContainerElement this[string name]
         {
-            get { return this.GetElement(name); }
+            get { return GetElement(name); }
         }
 
         /// <summary>
@@ -25,7 +26,7 @@ namespace Unity.Configuration
         /// </summary>
         public ContainerElement Default
         {
-            get { return this.GetElement(string.Empty); }
+            get { return GetElement(string.Empty); }
         }
 
         /// <summary>
@@ -35,7 +36,7 @@ namespace Unity.Configuration
         /// <returns>Item at that index or null if not present.</returns>
         protected override ContainerElement GetElement(int index)
         {
-            return this.PrepareElement(base.GetElement(index));
+            return PrepareElement(base.GetElement(index));
         }
 
         /// <summary>
@@ -45,14 +46,14 @@ namespace Unity.Configuration
         /// <returns>Item with that key or null if not present.</returns>
         protected override ContainerElement GetElement(object key)
         {
-            return this.PrepareElement(base.GetElement(key));
+            return PrepareElement(base.GetElement(key));
         }
 
         private ContainerElement PrepareElement(ContainerElement element)
         {
             if (element != null)
             {
-                element.ContainingSection = this.ContainingSection;
+                element.ContainingSection = ContainingSection;
             }
             return element;
         }

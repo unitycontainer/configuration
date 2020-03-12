@@ -1,9 +1,10 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Extensions;
 using Unity.Injection;
 
@@ -48,8 +49,8 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            writer.WriteAttributeIfNotEmpty(TypeNamePropertyName, this.TypeName);
-            foreach (var valueElement in this.Values)
+            writer.WriteAttributeIfNotEmpty(TypeNamePropertyName, TypeName);
+            foreach (var valueElement in Values)
             {
                 ValueElementHelper.SerializeParameterValueElement(writer, valueElement, true);
             }
@@ -66,11 +67,11 @@ namespace Unity.Configuration
         /// <returns></returns>
         public override ParameterValue GetInjectionParameterValue(IUnityContainer container, Type parameterType)
         {
-            this.GuardTypeIsAnArray(parameterType);
+            GuardTypeIsAnArray(parameterType);
 
-            Type elementType = this.GetElementType(parameterType);
+            Type elementType = GetElementType(parameterType);
 
-            var values = this.Values.Select(v => v.GetInjectionParameterValue(container, elementType));
+            var values = Values.Select(v => v.GetInjectionParameterValue(container, elementType));
 
             if (elementType.IsGenericParameter)
             {
@@ -81,7 +82,7 @@ namespace Unity.Configuration
 
         private void GuardTypeIsAnArray(Type externalParameterType)
         {
-            if (string.IsNullOrEmpty(this.TypeName))
+            if (string.IsNullOrEmpty(TypeName))
             {
                 if (!externalParameterType.IsArray)
                 {
@@ -93,7 +94,7 @@ namespace Unity.Configuration
 
         private Type GetElementType(Type parameterType)
         {
-            return TypeResolver.ResolveTypeWithDefault(this.TypeName, null) ?? parameterType.GetElementType();
+            return TypeResolver.ResolveTypeWithDefault(TypeName, null) ?? parameterType.GetElementType();
         }
     }
 }

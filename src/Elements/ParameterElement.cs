@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Extensions;
 using Unity.Injection;
 
@@ -26,7 +28,7 @@ namespace Unity.Configuration
         /// </summary>
         public ParameterElement()
         {
-            this.valueElementHelper = new ValueElementHelper(this);
+            valueElementHelper = new ValueElementHelper(this);
         }
 
         /// <summary>
@@ -64,13 +66,13 @@ namespace Unity.Configuration
         public ParameterValueElement Value
         {
             get { return ValueElementHelper.GetValue(valueElement); }
-            set { this.valueElement = value; }
+            set { valueElement = value; }
         }
 
         ParameterValueElement IValueProvidingElement.Value
         {
-            get { return this.valueElement; }
-            set { this.Value = value; }
+            get { return valueElement; }
+            set { Value = value; }
         }
 
         /// <summary>
@@ -84,7 +86,7 @@ namespace Unity.Configuration
             {
                 return string.Format(CultureInfo.CurrentCulture,
                     Constants.DestinationNameFormat,
-                    Constants.Parameter, this.Name);
+                    Constants.Parameter, Name);
             }
         }
 
@@ -100,16 +102,16 @@ namespace Unity.Configuration
             if (null == parameterType) throw new ArgumentNullException(nameof(parameterType));
 
             Type requiredType = parameterType;
-            if (!string.IsNullOrEmpty(this.TypeName))
+            if (!string.IsNullOrEmpty(TypeName))
             {
                 Debug.Assert(
                     !parameterType.IsGenericParameter,
                     "parameterType shouldn't be a generic parameter if TypeName is not null, because the " +
                     "TypeName is used to match the method parameter when present.");
 
-                requiredType = TypeResolver.ResolveType(this.TypeName);
+                requiredType = TypeResolver.ResolveType(TypeName);
             }
-            return this.Value.GetInjectionParameterValue(container, requiredType);
+            return Value.GetInjectionParameterValue(container, requiredType);
         }
 
         /// <summary>
@@ -122,14 +124,14 @@ namespace Unity.Configuration
         {
             if (null == parameterInfo) throw new ArgumentNullException(nameof(parameterInfo));
 
-            if (this.Name != parameterInfo.Name)
+            if (Name != parameterInfo.Name)
             {
                 return false;
             }
 
-            if (!string.IsNullOrEmpty(this.TypeName))
+            if (!string.IsNullOrEmpty(TypeName))
             {
-                Type parameterElementType = TypeResolver.ResolveType(this.TypeName);
+                Type parameterElementType = TypeResolver.ResolveType(TypeName);
                 return parameterElementType == parameterInfo.ParameterType;
             }
 
@@ -150,7 +152,7 @@ namespace Unity.Configuration
         protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
         {
             base.DeserializeElement(reader, serializeCollectionKey);
-            this.valueElementHelper.CompleteValueElement(reader);
+            valueElementHelper.CompleteValueElement(reader);
         }
 
         /// <summary>
@@ -168,7 +170,7 @@ namespace Unity.Configuration
             {
                 return true;
             }
-            return this.valueElementHelper.DeserializeUnrecognizedAttribute(name, value);
+            return valueElementHelper.DeserializeUnrecognizedAttribute(name, value);
         }
 
         /// <summary>
@@ -195,7 +197,7 @@ namespace Unity.Configuration
         /// </exception>
         protected override bool OnDeserializeUnrecognizedElement(string elementName, XmlReader reader)
         {
-            return this.valueElementHelper.DeserializeUnknownElement(elementName, reader) ||
+            return valueElementHelper.DeserializeUnknownElement(elementName, reader) ||
                 base.OnDeserializeUnrecognizedElement(elementName, reader);
         }
 
@@ -212,9 +214,9 @@ namespace Unity.Configuration
         {
             if (null == writer) throw new ArgumentNullException(nameof(writer));
 
-            writer.WriteAttributeString(ParameterElement.NamePropertyName, this.Name);
-            writer.WriteAttributeIfNotEmpty(ParameterElement.TypeNamePropertyName, this.TypeName);
-            ValueElementHelper.SerializeParameterValueElement(writer, this.Value, false);
+            writer.WriteAttributeString(ParameterElement.NamePropertyName, Name);
+            writer.WriteAttributeIfNotEmpty(ParameterElement.TypeNamePropertyName, TypeName);
+            ValueElementHelper.SerializeParameterValueElement(writer, Value, false);
         }
     }
 }

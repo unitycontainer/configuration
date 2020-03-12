@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+﻿using Unity.Configuration.Abstractions;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests.TestObjects
 {

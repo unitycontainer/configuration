@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using Unity.Configuration.Abstractions;
 
 namespace Unity.Configuration
 {

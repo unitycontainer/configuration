@@ -1,5 +1,7 @@
 ﻿using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 
 namespace Unity.Configuration
 {
@@ -33,11 +35,11 @@ namespace Unity.Configuration
             }
             set
             {
-                if (this.BaseGet(alias) != null)
+                if (BaseGet(alias) != null)
                 {
-                    this.BaseRemove(alias);
+                    BaseRemove(alias);
                 }
-                this.BaseAdd(new AliasElement { Alias = alias, TypeName = value }, true);
+                BaseAdd(new AliasElement { Alias = alias, TypeName = value }, true);
             }
         }
 

@@ -1,11 +1,11 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
+using Unity.Configuration.Abstractions;
 using Unity.Configuration.Extensions;
 using Unity.Injection;
 
@@ -55,7 +55,7 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            foreach (var param in this.Parameters)
+            foreach (var param in Parameters)
             {
                 writer.WriteElement("param", param.SerializeContent);
             }
@@ -75,23 +75,23 @@ namespace Unity.Configuration
         {
             var typeToConstruct = toType;
 
-            var constructorToCall = this.FindConstructorInfo(typeToConstruct);
+            var constructorToCall = FindConstructorInfo(typeToConstruct);
 
-            this.GuardIsMatchingConstructor(typeToConstruct, constructorToCall);
+            GuardIsMatchingConstructor(typeToConstruct, constructorToCall);
 
-            return new[] { this.MakeInjectionMember(container, constructorToCall) };
+            return new[] { MakeInjectionMember(container, constructorToCall) };
         }
 
         private ConstructorInfo FindConstructorInfo(Type typeToConstruct)
         {
-            return typeToConstruct.GetConstructors().Where(this.ConstructorMatches).FirstOrDefault();
+            return typeToConstruct.GetConstructors().Where(ConstructorMatches).FirstOrDefault();
         }
 
         private bool ConstructorMatches(ConstructorInfo candiateConstructor)
         {
             var constructorParams = candiateConstructor.GetParameters();
 
-            if (constructorParams.Length != this.Parameters.Count)
+            if (constructorParams.Length != Parameters.Count)
             {
                 return false;
             }
@@ -107,7 +107,7 @@ namespace Unity.Configuration
 
             for (int i = 0; i < parameterInfos.Length; ++i)
             {
-                values.Add(this.Parameters[i].GetParameterValue(container, parameterInfos[i].ParameterType));
+                values.Add(Parameters[i].GetParameterValue(container, parameterInfos[i].ParameterType));
             }
 
             return new InjectionConstructor(values.ToArray());
@@ -117,7 +117,7 @@ namespace Unity.Configuration
         {
             if (ctor == null)
             {
-                string parameterNames = string.Join(", ", this.Parameters.Select(p => p.Name).ToArray());
+                string parameterNames = string.Join(", ", Parameters.Select(p => p.Name).ToArray());
 
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.CurrentCulture, Constants.NoMatchingConstructor,

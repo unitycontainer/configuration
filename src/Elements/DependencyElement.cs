@@ -1,10 +1,10 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Microsoft.Practices.Unity.Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Extensions;
 using Unity.Injection;
 
@@ -35,8 +35,8 @@ namespace Unity.Configuration
         /// initialize this object with.</param>
         public DependencyElement(IDictionary<string, string> attributeValues)
         {
-            SetIfPresent(attributeValues, "dependencyName", value => this.Name = value);
-            SetIfPresent(attributeValues, "dependencyType", value => this.TypeName = value);
+            SetIfPresent(attributeValues, "dependencyName", value => Name = value);
+            SetIfPresent(attributeValues, "dependencyType", value => TypeName = value);
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         void IAttributeOnlyElement.SerializeContent(XmlWriter writer)
         {
-            writer.WriteAttributeIfNotEmpty("dependencyName", this.Name)
-                  .WriteAttributeIfNotEmpty("dependencyType", this.TypeName);
+            writer.WriteAttributeIfNotEmpty("dependencyName", Name)
+                  .WriteAttributeIfNotEmpty("dependencyType", TypeName);
         }
 
         /// <summary>
@@ -82,8 +82,8 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            writer.WriteAttributeIfNotEmpty(NamePropertyName, this.Name)
-                .WriteAttributeIfNotEmpty(TypeNamePropertyName, this.TypeName);
+            writer.WriteAttributeIfNotEmpty(NamePropertyName, Name)
+                .WriteAttributeIfNotEmpty(TypeNamePropertyName, TypeName);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Unity.Configuration
         {
             if (null == parameterType) throw new ArgumentNullException(nameof(parameterType));
 
-            string dependencyName = this.Name;
+            string dependencyName = Name;
             if (string.IsNullOrEmpty(dependencyName))
             {
                 dependencyName = null;
@@ -107,20 +107,20 @@ namespace Unity.Configuration
 
             if (parameterType.IsGenericParameter)
             {
-                if (!string.IsNullOrEmpty(this.TypeName))
+                if (!string.IsNullOrEmpty(TypeName))
                 {
                     throw new InvalidOperationException(
                         string.Format(
                             CultureInfo.CurrentCulture,
                             Constants.DependencyForGenericParameterWithTypeSet,
                             parameterType.Name,
-                            this.TypeName));
+                            TypeName));
                 }
 
                 return new GenericParameter(parameterType.Name, dependencyName);
             }
 
-            return new ResolvedParameter(TypeResolver.ResolveTypeWithDefault(this.TypeName, parameterType), dependencyName);
+            return new ResolvedParameter(TypeResolver.ResolveTypeWithDefault(TypeName, parameterType), dependencyName);
         }
 
         private static void SetIfPresent(IDictionary<string, string> attributeValues, string key, Action<string> setter)

@@ -1,7 +1,7 @@
-﻿using Microsoft.Practices.Unity.Configuration;
-using Microsoft.Practices.Unity.TestSupport;
+﻿using Microsoft.Practices.Unity.TestSupport;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using Unity.Configuration;
 
 namespace Microsoft.Practices
 {

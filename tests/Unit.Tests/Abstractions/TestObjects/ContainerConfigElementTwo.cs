@@ -1,6 +1,5 @@
-﻿
-
-using Unity;
+﻿using Unity;
+using Unity.Configuration.Abstractions;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests.TestObjects
 {

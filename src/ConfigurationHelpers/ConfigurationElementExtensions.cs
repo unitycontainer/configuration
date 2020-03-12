@@ -2,8 +2,9 @@
 using System;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Abstractions;
 
-namespace Unity.Configuration
+namespace Unity.Configuration.ConfigurationHelpers
 {
     /// <summary>
     /// Helpful extension methods when implementing configuration sections

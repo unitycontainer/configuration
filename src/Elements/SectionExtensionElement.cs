@@ -2,6 +2,8 @@
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Extensions;
 
 namespace Unity.Configuration

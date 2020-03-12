@@ -25,17 +25,5 @@ namespace Unity.Configuration
         {
             LoadContainer("invalidConstructor");
         }
-
-        // Disable obsolete warning for this one test
-#pragma warning disable 618
-        [TestMethod]
-        public void OldConfigureAPIStillWorks()
-        {
-            CreateContainer();
-            Section.Containers["defaultConstructor"].Configure(Container);
-            var result = Container.Resolve<MockDatabase>();
-            Assert.IsTrue(result.DefaultConstructorCalled);
-        }
-#pragma warning restore 618
     }
 }

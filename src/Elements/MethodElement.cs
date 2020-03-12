@@ -1,5 +1,4 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -7,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Xml;
+using Unity.Configuration.Abstractions;
 using Unity.Configuration.Extensions;
 using Unity.Injection;
 
@@ -30,7 +30,7 @@ namespace Unity.Configuration
         /// </summary>
         public MethodElement()
         {
-            this.methodCount = Interlocked.Increment(ref methodElementCounter);
+            methodCount = Interlocked.Increment(ref methodElementCounter);
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Unity.Configuration
         /// </summary>
         public override string Key
         {
-            get { return string.Format(CultureInfo.InvariantCulture, "method:{0}:{1}", this.Name, this.methodCount); }
+            get { return string.Format(CultureInfo.InvariantCulture, "method:{0}:{1}", Name, methodCount); }
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Unity.Configuration
         {
             if (null == writer) throw new ArgumentNullException(nameof(writer));
 
-            writer.WriteAttributeString(NamePropertyName, this.Name);
+            writer.WriteAttributeString(NamePropertyName, Name);
             foreach (var param in Parameters)
             {
                 writer.WriteElement("param", param.SerializeContent);
@@ -98,16 +98,16 @@ namespace Unity.Configuration
         /// applied to the container registration.</returns>
         public override IEnumerable<InjectionMember> GetInjectionMembers(IUnityContainer container, Type fromType, Type toType, string name)
         {
-            MethodInfo methodToCall = this.FindMethodInfo(toType);
+            MethodInfo methodToCall = FindMethodInfo(toType);
 
-            this.GuardIsMatchingMethod(toType, methodToCall);
+            GuardIsMatchingMethod(toType, methodToCall);
 
-            return new[] { this.MakeInjectionMember(container, methodToCall) };
+            return new[] { MakeInjectionMember(container, methodToCall) };
         }
 
         private MethodInfo FindMethodInfo(Type typeToInitialize)
         {
-            return typeToInitialize.GetMethods().Where(this.MethodMatches).FirstOrDefault();
+            return typeToInitialize.GetMethods().Where(MethodMatches).FirstOrDefault();
         }
 
         private InjectionMember MakeInjectionMember(IUnityContainer container, MethodInfo methodToCall)
@@ -117,22 +117,22 @@ namespace Unity.Configuration
 
             for (int index = 0; index < parameterInfos.Length; ++index)
             {
-                parameterValues.Add(this.Parameters[index].GetParameterValue(container, parameterInfos[index].ParameterType));
+                parameterValues.Add(Parameters[index].GetParameterValue(container, parameterInfos[index].ParameterType));
             }
 
-            return new InjectionMethod(this.Name, parameterValues.ToArray());
+            return new InjectionMethod(Name, parameterValues.ToArray());
         }
 
         private bool MethodMatches(MethodInfo method)
         {
-            if (method.Name != this.Name)
+            if (method.Name != Name)
             {
                 return false;
             }
 
             var methodParameters = method.GetParameters();
 
-            if (methodParameters.Length != this.Parameters.Count)
+            if (methodParameters.Length != Parameters.Count)
             {
                 return false;
             }
@@ -145,10 +145,10 @@ namespace Unity.Configuration
         {
             if (methodToCall == null)
             {
-                string parameterNames = string.Join(", ", this.Parameters.Select(p => p.Name).ToArray());
+                string parameterNames = string.Join(", ", Parameters.Select(p => p.Name).ToArray());
 
                 throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                    Constants.NoMatchingMethod, typeToInitialize, this.Name, parameterNames));
+                    Constants.NoMatchingMethod, typeToInitialize, Name, parameterNames));
             }
         }
     }

@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Lifetime;
 
 namespace Unity.Configuration

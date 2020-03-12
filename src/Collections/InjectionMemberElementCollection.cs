@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Extensions;
 
 namespace Unity.Configuration
@@ -16,6 +18,7 @@ namespace Unity.Configuration
             {
                 { "constructor", typeof(ConstructorElement) },
                 { "property", typeof(PropertyElement) },
+                { "field", typeof(FieldElement) },
                 { "method", typeof(MethodElement) }
             };
 
@@ -42,7 +45,7 @@ namespace Unity.Configuration
         /// </exception>
         protected override bool OnDeserializeUnrecognizedElement(string elementName, XmlReader reader)
         {
-            return this.DeserializeRegisteredElement(elementName, reader) ||
+            return DeserializeRegisteredElement(elementName, reader) ||
                 base.OnDeserializeUnrecognizedElement(elementName, reader);
         }
 
@@ -71,17 +74,17 @@ namespace Unity.Configuration
 
         private Type GetKnownElementType(string elementName)
         {
-            return this.elementTypeMap.GetOrNull(elementName);
+            return elementTypeMap.GetOrNull(elementName);
         }
 
         private static Type GetExtensionElementType(string elementName)
         {
-            return Microsoft.Practices.Unity.Configuration.ExtensionElementMap.GetInjectionMemberElementType(elementName);
+            return ExtensionElementMap.GetInjectionMemberElementType(elementName);
         }
 
         private bool DeserializeRegisteredElement(string elementName, XmlReader reader)
         {
-            Type elementType = this.GetKnownElementType(elementName) ?? GetExtensionElementType(elementName);
+            Type elementType = GetKnownElementType(elementName) ?? GetExtensionElementType(elementName);
             if (elementType == null)
             {
                 return false;

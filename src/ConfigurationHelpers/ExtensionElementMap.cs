@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using Unity.Configuration.Abstractions;
 using Unity.Configuration.Extensions;
 
 namespace Unity.Configuration

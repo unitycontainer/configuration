@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Xml;
 
-namespace Unity.Configuration
+namespace Unity.Configuration.ConfigurationHelpers
 {
     /// <summary>
     /// A helper class used to map element tag names to a handler method

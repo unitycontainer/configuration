@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Abstractions;
 
 namespace Unity.Configuration
 {

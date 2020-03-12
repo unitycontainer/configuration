@@ -1,9 +1,9 @@
-﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Linq;
 using System.Xml;
-using Unity;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Extensions;
 using Unity.Lifetime;
 

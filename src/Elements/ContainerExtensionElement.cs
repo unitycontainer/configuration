@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Configuration;
 using System.Xml;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 using Unity.Extension;
 
 namespace Unity.Configuration
@@ -30,7 +32,7 @@ namespace Unity.Configuration
         {
             if (null == container) throw new ArgumentNullException(nameof(container));
 
-            var extensionType = this.GetExtensionType();
+            var extensionType = GetExtensionType();
             var extension = (UnityContainerExtension)container.Resolve(extensionType);
             container.AddExtension(extension);
         }
@@ -46,12 +48,12 @@ namespace Unity.Configuration
         {
             if (null == writer) throw new ArgumentNullException(nameof(writer));
 
-            writer.WriteAttributeString(TypeNamePropertyName, this.TypeName);
+            writer.WriteAttributeString(TypeNamePropertyName, TypeName);
         }
 
         private Type GetExtensionType()
         {
-            return TypeResolver.ResolveType(this.TypeName, true);
+            return TypeResolver.ResolveType(TypeName, true);
         }
     }
 }

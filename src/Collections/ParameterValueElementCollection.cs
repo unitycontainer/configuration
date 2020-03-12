@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using Unity.Configuration.Abstractions;
+using Unity.Configuration.ConfigurationHelpers;
 
 namespace Unity.Configuration
 {

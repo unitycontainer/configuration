@@ -1,11 +1,10 @@
-﻿using Microsoft.Practices.Unity.Configuration;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Linq;
 using System.Xml;
-using Unity;
+using Unity.Configuration.Abstractions;
 using Unity.Configuration.Extensions;
+using Unity.Configuration.ConfigurationHelpers;
 
 namespace Unity.Configuration
 {
@@ -30,7 +29,7 @@ namespace Unity.Configuration
 
         private readonly ContainerConfiguringElementCollection configuringElements = new ContainerConfiguringElementCollection();
 
-        internal UnityConfigurationSection ContainingSection { get; set; }
+        internal ConfigurationSection ContainingSection { get; set; }
 
         /// <summary>
         /// Name for this container configuration as given in the config file.
@@ -78,17 +77,7 @@ namespace Unity.Configuration
         /// the actual property to show up as a nested element in the configuration.</remarks>
         public ContainerConfiguringElementCollection ConfiguringElements
         {
-            get { return this.configuringElements; }
-        }
-
-        /// <summary>
-        /// Original configuration API kept for backwards compatibility.
-        /// </summary>
-        /// <param name="container">Container to configure</param>
-        [Obsolete("Use the UnityConfigurationSection.Configure(container, name) method instead")]
-        public void Configure(IUnityContainer container)
-        {
-            this.ContainingSection.Configure(container, this.Name);
+            get { return configuringElements; }
         }
 
         /// <summary>
@@ -132,7 +121,7 @@ namespace Unity.Configuration
         protected override bool OnDeserializeUnrecognizedElement(string elementName, XmlReader reader)
         {
             return UnknownElementHandlerMap.ProcessElement(this, elementName, reader) ||
-                this.DeserializeContainerConfiguringElement(elementName, reader) ||
+                DeserializeContainerConfiguringElement(elementName, reader) ||
                 base.OnDeserializeUnrecognizedElement(elementName, reader);
         }
 
@@ -145,12 +134,12 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            writer.WriteAttributeIfNotEmpty(ContainerElement.NamePropertyName, this.Name);
+            writer.WriteAttributeIfNotEmpty(ContainerElement.NamePropertyName, Name);
 
-            this.Extensions.SerializeElementContents(writer, "extension");
-            this.Registrations.SerializeElementContents(writer, "register");
-            this.Instances.SerializeElementContents(writer, "instance");
-            this.SerializeContainerConfiguringElements(writer);
+            Extensions.SerializeElementContents(writer, "extension");
+            Registrations.SerializeElementContents(writer, "register");
+            Instances.SerializeElementContents(writer, "instance");
+            SerializeContainerConfiguringElements(writer);
         }
 
         private bool DeserializeContainerConfiguringElement(string elementName, XmlReader reader)
@@ -158,7 +147,7 @@ namespace Unity.Configuration
             Type elementType = ExtensionElementMap.GetContainerConfiguringElementType(elementName);
             if (elementType != null)
             {
-                this.ReadElementByType(reader, elementType, this.ConfiguringElements);
+                this.ReadElementByType(reader, elementType, ConfiguringElements);
                 return true;
             }
             return false;
@@ -166,7 +155,7 @@ namespace Unity.Configuration
 
         private void SerializeContainerConfiguringElements(XmlWriter writer)
         {
-            foreach (var element in this.ConfiguringElements)
+            foreach (var element in ConfiguringElements)
             {
                 string tag = ExtensionElementMap.GetTagForExtensionElement(element);
                 writer.WriteElement(tag, element.SerializeContent);
