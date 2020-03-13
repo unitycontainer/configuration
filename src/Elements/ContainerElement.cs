@@ -4,7 +4,7 @@ using System.Linq;
 using System.Xml;
 using Unity.Configuration.Abstractions;
 using Unity.Configuration.Extensions;
-using Unity.Configuration.ConfigurationHelpers;
+using Unity.Configuration.Storage;
 
 namespace Unity.Configuration
 {
@@ -14,13 +14,43 @@ namespace Unity.Configuration
     /// </summary>
     public class ContainerElement : DeserializableConfigurationElement
     {
-        private const string RegistrationsPropertyName = "";
-        private const string NamePropertyName = "name";
-        private const string InstancesPropertyName = "instances";
-        private const string ExtensionsPropertyName = "extensions";
+        #region Constants
 
-        private static readonly UnknownElementHandlerMap<ContainerElement> UnknownElementHandlerMap =
-            new UnknownElementHandlerMap<ContainerElement>
+        private const string NameConst          = "name";
+        private const string InstancesConst     = "instances";
+        private const string ExtensionsConst    = "extensions";
+        private const string RegistrationsConst = "";
+
+        #endregion
+
+
+        #region Fields
+
+        private static ConfigurationPropertyCollection _properties;
+
+        #endregion
+
+
+        #region Constructors
+
+        static ContainerElement()
+        {
+            _properties = new ConfigurationPropertyCollection()
+            { 
+                new ConfigurationProperty(NameConst,            typeof(string),                     "",   ConfigurationPropertyOptions.IsKey),
+                new ConfigurationProperty(RegistrationsConst,   typeof(RegisterElementCollection),  null, ConfigurationPropertyOptions.IsDefaultCollection),
+                new ConfigurationProperty(InstancesConst,       typeof(InstanceElementCollection)),
+                new ConfigurationProperty(ExtensionsConst,      typeof(ContainerExtensionElementCollection))
+            };
+        }
+
+        #endregion
+
+        //protected override ConfigurationPropertyCollection Properties => _properties;
+
+
+        private static readonly ElementHandlerMap<ContainerElement> UnknownElementHandlerMap =
+            new ElementHandlerMap<ContainerElement>
                 {
                     { "types", (ce, xr) => ce.Registrations.Deserialize(xr) },
                     { "extension", (ce, xr) => ce.ReadUnwrappedElement(xr, ce.Extensions) },
@@ -34,38 +64,41 @@ namespace Unity.Configuration
         /// <summary>
         /// Name for this container configuration as given in the config file.
         /// </summary>
-        [ConfigurationProperty(NamePropertyName, IsKey = true, DefaultValue = "")]
+        [ConfigurationProperty(NameConst, IsKey = true, DefaultValue = "")]
         public string Name
         {
-            get { return (string)base[NamePropertyName]; }
-            set { base[NamePropertyName] = value; }
+            get { return (string)base[NameConst]; }
+            set { base[NameConst] = value; }
         }
 
         /// <summary>
         /// The type registrations in this container.
         /// </summary>
-        [ConfigurationProperty(RegistrationsPropertyName, IsDefaultCollection = true)]
+        [ConfigurationProperty(RegistrationsConst, IsDefaultCollection = true)]
+        [ConfigurationCollection(typeof(RegisterElement), AddItemName = "register")]
         public RegisterElementCollection Registrations
         {
-            get { return (RegisterElementCollection)base[RegistrationsPropertyName]; }
+            get { return (RegisterElementCollection)base[RegistrationsConst]; }
         }
 
         /// <summary>
         /// Any instances to register in the container.
         /// </summary>
-        [ConfigurationProperty(InstancesPropertyName)]
+        [ConfigurationProperty(InstancesConst)]
+        [ConfigurationCollection(typeof(InstanceElement), AddItemName = "instance")]
         public InstanceElementCollection Instances
         {
-            get { return (InstanceElementCollection)base[InstancesPropertyName]; }
+            get { return (InstanceElementCollection)base[InstancesConst]; }
         }
 
         /// <summary>
         /// Any extensions to add to the container.
         /// </summary>
-        [ConfigurationProperty(ExtensionsPropertyName)]
+        [ConfigurationProperty(ExtensionsConst)]
+        [ConfigurationCollection(typeof(ContainerExtensionElement))]
         public ContainerExtensionElementCollection Extensions
         {
-            get { return (ContainerExtensionElementCollection)base[ExtensionsPropertyName]; }
+            get { return (ContainerExtensionElementCollection)base[ExtensionsConst]; }
         }
 
         /// <summary>
@@ -134,7 +167,7 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            writer.WriteAttributeIfNotEmpty(ContainerElement.NamePropertyName, Name);
+            writer.WriteAttributeIfNotEmpty(ContainerElement.NameConst, Name);
 
             Extensions.SerializeElementContents(writer, "extension");
             Registrations.SerializeElementContents(writer, "register");

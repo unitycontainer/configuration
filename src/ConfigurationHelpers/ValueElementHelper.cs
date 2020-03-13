@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Xml;
 using Unity.Configuration.Abstractions;
 using Unity.Configuration.Extensions;
+using Unity.Configuration.Storage;
 
 namespace Unity.Configuration.ConfigurationHelpers
 {
@@ -131,7 +132,7 @@ namespace Unity.Configuration.ConfigurationHelpers
         private static string GetTagForElement(ConfigurationElement element)
         {
             Type elementType = element.GetType();
-            return KnownValueElementTags.GetOrNull(elementType) ??
+            return KnownValueElementTags.GetOrDefault(elementType) ??
                 ExtensionElementMap.GetTagForExtensionElement(element);
         }
         private void SetValue<TElement>(XmlReader reader)

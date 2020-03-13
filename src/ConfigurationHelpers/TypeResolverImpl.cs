@@ -141,8 +141,8 @@ namespace Unity.Configuration.ConfigurationHelpers
 
         private Type ResolveAlias(string typeNameOrAlias)
         {
-            string mappedTypeName = aliases.GetOrNull(typeNameOrAlias) ??
-                aliases.GetOrNull(RemoveGenericWart(typeNameOrAlias));
+            string mappedTypeName = aliases.GetOrDefault(typeNameOrAlias) ??
+                aliases.GetOrDefault(RemoveGenericWart(typeNameOrAlias));
             if (mappedTypeName != null)
             {
                 return Type.GetType(mappedTypeName);

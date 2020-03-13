@@ -168,7 +168,7 @@ namespace Unity.Configuration
         /// applied to the container registration.</returns>
         public override IEnumerable<InjectionMember> GetInjectionMembers(IUnityContainer container, Type fromType, Type toType, string name)
         {
-            return new[] { new InjectionProperty(Name, Value.GetInjectionParameterValue(container, GetPropertyType(toType))) };
+            return new[] { new InjectionField(Name, Value.GetInjectionParameterValue(container, GetPropertyType(toType))) };
         }
 
         private Type GetPropertyType(Type typeContainingProperty)

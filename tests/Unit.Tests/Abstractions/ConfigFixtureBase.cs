@@ -29,7 +29,6 @@ namespace Unity.Configuration.Tests
 
         protected static System.Configuration.Configuration Configuration => (System.Configuration.Configuration)TestContext.Properties[TestConfiguration];
 
-        protected static ConfigurationSection GetSection(string name) => Configuration.GetSection(name);
 
         protected IUnityContainer Container { get; private set; }
 

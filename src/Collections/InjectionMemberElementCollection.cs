@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Xml;
 using Unity.Configuration.Abstractions;
-using Unity.Configuration.ConfigurationHelpers;
 using Unity.Configuration.Extensions;
 
 namespace Unity.Configuration
@@ -74,7 +73,7 @@ namespace Unity.Configuration
 
         private Type GetKnownElementType(string elementName)
         {
-            return elementTypeMap.GetOrNull(elementName);
+            return elementTypeMap.GetOrDefault(elementName);
         }
 
         private static Type GetExtensionElementType(string elementName)

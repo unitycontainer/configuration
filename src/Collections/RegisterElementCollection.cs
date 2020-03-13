@@ -1,7 +1,8 @@
 ﻿using System.Configuration;
 using System.Xml;
 using Unity.Configuration.Abstractions;
-using Unity.Configuration.ConfigurationHelpers;
+using Unity.Configuration.Extensions;
+using Unity.Configuration.Storage;
 
 namespace Unity.Configuration
 {
@@ -11,8 +12,37 @@ namespace Unity.Configuration
     [ConfigurationCollection(typeof(RegisterElement), AddItemName = "register")]
     public class RegisterElementCollection : DeserializableConfigurationElementCollection<RegisterElement>
     {
-        private static readonly UnknownElementHandlerMap<RegisterElementCollection> UnknownElementHandlerMap
-            = new UnknownElementHandlerMap<RegisterElementCollection>
+        #region Constants
+
+        private const string RegisterConst = "register";
+
+        #endregion
+
+
+        #region Fields
+
+        private static ConfigurationPropertyCollection _properties;
+
+        #endregion
+
+
+        #region Constructors
+
+        static RegisterElementCollection()
+        {
+            _properties = new ConfigurationPropertyCollection()
+            {
+                new ConfigurationProperty(RegisterConst, typeof(RegisterElement))
+            };
+        }
+
+        #endregion
+
+        //protected override ConfigurationPropertyCollection Properties => _properties;
+
+
+        private static readonly ElementHandlerMap<RegisterElementCollection> UnknownElementHandlerMap
+            = new ElementHandlerMap<RegisterElementCollection>
                 {
                     { "type", (rec, xr) => rec.ReadUnwrappedElement(xr, rec) }
                 };

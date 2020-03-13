@@ -22,14 +22,14 @@ namespace Unity.Configuration.Abstractions
         /// <returns>The item at the given index.</returns>
         public TElement this[int index]
         {
-            get { return this.GetElement(index); }
+            get { return GetElement(index); }
             set
             {
-                if (this.GetElement(index) != null)
+                if (GetElement(index) != null)
                 {
-                    this.BaseRemoveAt(index);
+                    BaseRemoveAt(index);
                 }
-                this.BaseAdd(index, value);
+                BaseAdd(index, value);
             }
         }
 
@@ -61,7 +61,7 @@ namespace Unity.Configuration.Abstractions
         /// <param name="reader">Contains the XML to initialize from.</param>
         public virtual void Deserialize(XmlReader reader)
         {
-            this.DeserializeElement(reader, false);
+            DeserializeElement(reader, false);
         }
 
         #endregion
@@ -77,7 +77,7 @@ namespace Unity.Configuration.Abstractions
         /// <filterpriority>1</filterpriority>
         public new IEnumerator<TElement> GetEnumerator()
         {
-            for (int index = 0; index < this.Count; ++index)
+            for (int index = 0; index < Count; ++index)
             {
                 yield return this[index];
             }
@@ -91,7 +91,7 @@ namespace Unity.Configuration.Abstractions
         /// <param name="element">Element to add.</param>
         public void Add(TElement element)
         {
-            this.BaseAdd(element);
+            BaseAdd(element);
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Unity.Configuration.Abstractions
         /// <param name="index">The index of the item to remove.</param>
         public void RemoveAt(int index)
         {
-            this.BaseRemoveAt(index);
+            BaseRemoveAt(index);
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Unity.Configuration.Abstractions
         /// </summary>
         public void Clear()
         {
-            this.BaseClear();
+            BaseClear();
         }
 
         /// <summary>

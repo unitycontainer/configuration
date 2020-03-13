@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Xml;
 
-namespace Unity.Configuration.ConfigurationHelpers
+namespace Unity.Configuration.Storage
 {
     /// <summary>
     /// A helper class used to map element tag names to a handler method
     /// used to interpret that element.
     /// </summary>
     /// <typeparam name="TContainingElement"></typeparam>
-    public class UnknownElementHandlerMap<TContainingElement> :
-        IEnumerable<KeyValuePair<string, Action<TContainingElement, XmlReader>>>
+    public class ElementHandlerMap<TContainingElement> : IEnumerable<KeyValuePair<string, Action<TContainingElement, XmlReader>>>
         where TContainingElement : ConfigurationElement
     {
         private readonly Dictionary<string, Action<TContainingElement, XmlReader>> elementActionMap =

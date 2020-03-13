@@ -14,6 +14,8 @@ namespace Unity.Configuration
             Section = (UnityConfigurationSection)Configuration.GetSection(SectionName);
         }
 
+        protected UnityConfigurationSection GetSection(string name) => (UnityConfigurationSection)Configuration.GetSection(name);
+
         protected override void LoadContainer()
         {
             base.CreateContainer();

@@ -157,17 +157,17 @@ namespace Unity.Configuration
 
             public Type GetContainerConfiguringElementType(string tag)
             {
-                return containerConfiguringElements.GetOrNull(tag);
+                return containerConfiguringElements.GetOrDefault(tag);
             }
 
             public Type GetInjectionMemberElementType(string tag)
             {
-                return injectionMemberElements.GetOrNull(tag);
+                return injectionMemberElements.GetOrDefault(tag);
             }
 
             public Type GetParameterValueElementType(string tag)
             {
-                return parameterValueElements.GetOrNull(tag);
+                return parameterValueElements.GetOrDefault(tag);
             }
 
             public string GetTagForExtensionElement(ConfigurationElement element)

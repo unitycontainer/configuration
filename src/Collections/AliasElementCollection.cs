@@ -1,7 +1,8 @@
 ﻿using System.Configuration;
 using System.Xml;
 using Unity.Configuration.Abstractions;
-using Unity.Configuration.ConfigurationHelpers;
+using Unity.Configuration.Extensions;
+using Unity.Configuration.Storage;
 
 namespace Unity.Configuration
 {
@@ -11,8 +12,8 @@ namespace Unity.Configuration
     [ConfigurationCollection(typeof(AliasElement))]
     public class AliasElementCollection : DeserializableConfigurationElementCollection<AliasElement>
     {
-        private static readonly UnknownElementHandlerMap<AliasElementCollection> UnknownElementHandlerMap
-            = new UnknownElementHandlerMap<AliasElementCollection>
+        private static readonly ElementHandlerMap<AliasElementCollection> UnknownElementHandlerMap
+            = new ElementHandlerMap<AliasElementCollection>
                 {
                     { "typeAlias", (aec, xr) => aec.ReadUnwrappedElement(xr, aec) }
                 };

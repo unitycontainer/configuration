@@ -5,7 +5,8 @@ using System.Text;
 using System.Xml;
 using Unity.Configuration.Abstractions;
 using Unity.Configuration.ConfigurationHelpers;
-
+using Unity.Configuration.Extensions;
+using Unity.Configuration.Storage;
 
 namespace Unity.Configuration
 {
@@ -31,8 +32,8 @@ namespace Unity.Configuration
         private const string AssembliesPropertyName = "assemblies";
         private const string XmlnsPropertyName = "xmlns";
 
-        private static readonly UnknownElementHandlerMap<UnityConfigurationSection> UnknownElementHandlerMap
-            = new UnknownElementHandlerMap<UnityConfigurationSection>
+        private static readonly ElementHandlerMap<UnityConfigurationSection> UnknownElementHandlerMap
+            = new ElementHandlerMap<UnityConfigurationSection>
                 {
                     { "typeAliases", (s, xr) => s.TypeAliases.Deserialize(xr) },
                     { "containers", (s, xr) => s.Containers.Deserialize(xr) },
