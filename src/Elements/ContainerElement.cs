@@ -26,29 +26,7 @@ namespace Unity.Configuration
 
         #region Fields
 
-        private static ConfigurationPropertyCollection _properties;
-
-        #endregion
-
-
-        #region Constructors
-
-        static ContainerElement()
-        {
-            _properties = new ConfigurationPropertyCollection()
-            { 
-                new ConfigurationProperty(NameConst,            typeof(string),                     "",   ConfigurationPropertyOptions.IsKey),
-                new ConfigurationProperty(RegistrationsConst,   typeof(RegisterElementCollection),  null, ConfigurationPropertyOptions.IsDefaultCollection),
-                new ConfigurationProperty(InstancesConst,       typeof(InstanceElementCollection)),
-                new ConfigurationProperty(ExtensionsConst,      typeof(ContainerExtensionElementCollection))
-            };
-        }
-
-        #endregion
-
-        //protected override ConfigurationPropertyCollection Properties => _properties;
-
-
+        private readonly ContainerConfiguringElementCollection configuringElements = new ContainerConfiguringElementCollection();
         private static readonly ElementHandlerMap<ContainerElement> UnknownElementHandlerMap =
             new ElementHandlerMap<ContainerElement>
                 {
@@ -57,7 +35,11 @@ namespace Unity.Configuration
                     { "instance", (ce, xr) => ce.ReadUnwrappedElement(xr, ce.Instances) }
                 };
 
-        private readonly ContainerConfiguringElementCollection configuringElements = new ContainerConfiguringElementCollection();
+        #endregion
+
+
+
+
 
         internal ConfigurationSection ContainingSection { get; set; }
 
@@ -75,7 +57,6 @@ namespace Unity.Configuration
         /// The type registrations in this container.
         /// </summary>
         [ConfigurationProperty(RegistrationsConst, IsDefaultCollection = true)]
-        [ConfigurationCollection(typeof(RegisterElement), AddItemName = "register")]
         public RegisterElementCollection Registrations
         {
             get { return (RegisterElementCollection)base[RegistrationsConst]; }
@@ -85,7 +66,6 @@ namespace Unity.Configuration
         /// Any instances to register in the container.
         /// </summary>
         [ConfigurationProperty(InstancesConst)]
-        [ConfigurationCollection(typeof(InstanceElement), AddItemName = "instance")]
         public InstanceElementCollection Instances
         {
             get { return (InstanceElementCollection)base[InstancesConst]; }
@@ -95,7 +75,6 @@ namespace Unity.Configuration
         /// Any extensions to add to the container.
         /// </summary>
         [ConfigurationProperty(ExtensionsConst)]
-        [ConfigurationCollection(typeof(ContainerExtensionElement))]
         public ContainerExtensionElementCollection Extensions
         {
             get { return (ContainerExtensionElementCollection)base[ExtensionsConst]; }

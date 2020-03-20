@@ -6,7 +6,7 @@ namespace Unity.Configuration
     /// <summary>
     /// A collection of <see cref="InstanceElement"/>s.
     /// </summary>
-    [ConfigurationCollection(typeof(InstanceElement))]
+    [ConfigurationCollection(typeof(InstanceElement), AddItemName = "instance")]
     public class InstanceElementCollection : DeserializableConfigurationElementCollection<InstanceElement>
     {
         /// <summary>
