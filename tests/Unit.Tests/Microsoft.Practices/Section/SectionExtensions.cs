@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Unity.Configuration.Tests.TestObjects;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using Unity.Configuration;
+using ExtensionElementMap = Unity.Configuration.ExtensionElementMap;
 
 namespace Microsoft.Practices
 {

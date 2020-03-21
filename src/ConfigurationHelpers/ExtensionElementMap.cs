@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Unity.Configuration.Abstractions;
 using Unity.Configuration.Extensions;
@@ -204,8 +203,6 @@ namespace Unity.Configuration
                 throw ElementTypeNotFound(elementType);
             }
 
-            [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
-                Justification = "Factory method to create exception for callers.")]
             private static Exception ElementTypeNotFound(Type elementType)
             {
                 return new ArgumentException(

@@ -3,12 +3,10 @@ using System.Configuration;
 using System.Globalization;
 using System.Text;
 using System.Xml;
+using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
 using Unity;
-using Unity.Configuration;
 using Unity.Configuration.Abstractions;
-using Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration.Extensions;
-using Unity.Configuration.Storage;
+using ExtensionMap = Unity.Configuration.ExtensionElementMap;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -34,8 +32,8 @@ namespace Microsoft.Practices.Unity.Configuration
         private const string AssembliesPropertyName = "assemblies";
         private const string XmlnsPropertyName = "xmlns";
 
-        private static readonly ElementHandlerMap<UnityConfigurationSection> UnknownElementHandlerMap
-            = new ElementHandlerMap<UnityConfigurationSection>
+        private static readonly UnknownElementHandlerMap<UnityConfigurationSection> UnknownElementHandlerMap
+            = new UnknownElementHandlerMap<UnityConfigurationSection>
                 {
                     { "typeAliases", (s, xr) => s.TypeAliases.Deserialize(xr) },
                     { "containers", (s, xr) => s.Containers.Deserialize(xr) },
@@ -144,14 +142,13 @@ namespace Microsoft.Practices.Unity.Configuration
             return container;
         }
 
-
         private static ContainerElement GuardContainerExists(string configuredContainerName, ContainerElement containerElement)
         {
             if (containerElement == null)
             {
                 throw new ArgumentException(
                     string.Format(CultureInfo.CurrentCulture,
-                        Constants.NoSuchContainer, configuredContainerName),
+                        "The container named '{0}' is not defined in this configuration section.", configuredContainerName),
                     "configuredContainerName");
             }
             return containerElement;
@@ -164,7 +161,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <exception cref="T:System.Configuration.ConfigurationErrorsException"><paramref name="reader"/> found no elements in the configuration file.</exception>
         protected override void DeserializeSection(XmlReader reader)
         {
-            ExtensionElementMap.Clear();
+            ExtensionMap.Clear();
             currentSection = this;
             base.DeserializeSection(reader);
         }
@@ -216,7 +213,7 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <param name="saveMode">The <see cref="T:System.Configuration.ConfigurationSaveMode"/> instance to use when writing to a string.</param>
         protected override string SerializeSection(ConfigurationElement parentElement, string name, ConfigurationSaveMode saveMode)
         {
-            ExtensionElementMap.Clear();
+            ExtensionMap.Clear();
             currentSection = this;
             TypeResolver.SetAliases(this);
             this.InitializeSectionExtensions();
@@ -240,11 +237,11 @@ namespace Microsoft.Practices.Unity.Configuration
         private static XmlWriter MakeXmlWriter(StringBuilder sb)
         {
             var settings = new XmlWriterSettings
-                               {
-                                   Indent = true,
-                                   OmitXmlDeclaration = true,
-                                   ConformanceLevel = ConformanceLevel.Fragment
-                               };
+            {
+                Indent = true,
+                OmitXmlDeclaration = true,
+                ConformanceLevel = ConformanceLevel.Fragment
+            };
 
             return XmlWriter.Create(sb, settings);
         }
@@ -306,24 +303,24 @@ namespace Microsoft.Practices.Unity.Configuration
             /// <param name="elementType">Type the tag maps to.</param>
             public override void AddElement(string tag, Type elementType)
             {
-                if (null == elementType) throw new ArgumentNullException(nameof(elementType));
+                Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(elementType, "elementType");
 
                 if (typeof(ContainerConfiguringElement).IsAssignableFrom(elementType))
                 {
-                    ExtensionElementMap.AddContainerConfiguringElement(this.prefix, tag, elementType);
+                    ExtensionMap.AddContainerConfiguringElement(this.prefix, tag, elementType);
                 }
                 else if (typeof(InjectionMemberElement).IsAssignableFrom(elementType))
                 {
-                    ExtensionElementMap.AddInjectionMemberElement(this.prefix, tag, elementType);
+                    ExtensionMap.AddInjectionMemberElement(this.prefix, tag, elementType);
                 }
                 else if (typeof(ParameterValueElement).IsAssignableFrom(elementType))
                 {
-                    ExtensionElementMap.AddParameterValueElement(this.prefix, tag, elementType);
+                    ExtensionMap.AddParameterValueElement(this.prefix, tag, elementType);
                 }
                 else
                 {
                     throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture,
-                        Constants.InvalidExtensionElementType,
+                        "The extension element type {0} that is being added does not derive from ContainerConfiguringElement, InjectionMemberElement, or ParameterInjectionParameterValueElement.An extension element must derive from one of these types.",
                         elementType.Name));
                 }
             }

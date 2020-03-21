@@ -2,10 +2,13 @@
 using System.Configuration;
 using System.Globalization;
 using System.Xml;
+using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+using Unity.Configuration;
+using Microsoft.Practices.Unity.Utility;
+using Abstractions = Unity.Configuration.Abstractions;
 using Unity.Configuration.Abstractions;
-using Unity.Configuration.ConfigurationHelpers;
 
-namespace Unity.Configuration
+namespace Microsoft.Practices.Unity.Configuration
 {
     /// <summary>
     /// A configuration element used to specify which extensions to
@@ -16,7 +19,7 @@ namespace Unity.Configuration
         private const string TypeNamePropertyName = "type";
         private const string PrefixPropertyName = "prefix";
 
-        private SectionExtension extensionObject;
+        private Abstractions.SectionExtension extensionObject;
 
         /// <summary>
         /// Type of the section extender object that will provide new elements to the schema.
@@ -46,13 +49,13 @@ namespace Unity.Configuration
         /// <summary>
         /// The extension object represented by this element.
         /// </summary>
-        public SectionExtension ExtensionObject
+        public Abstractions.SectionExtension ExtensionObject
         {
             get
             {
                 if (this.extensionObject == null)
                 {
-                    this.extensionObject = (SectionExtension)Activator.CreateInstance(this.GetExtensionObjectType());
+                    this.extensionObject = (Abstractions.SectionExtension)Activator.CreateInstance(this.GetExtensionObjectType());
                 }
                 return this.extensionObject;
             }
@@ -84,8 +87,7 @@ namespace Unity.Configuration
         /// <param name="writer">Writer to send XML content to.</param>
         public override void SerializeContent(XmlWriter writer)
         {
-            if (null == writer) throw new ArgumentNullException(nameof(writer));
-            
+            Guard.ArgumentNotNull(writer, "writer");
             writer.WriteAttributeString(SectionExtensionElement.TypeNamePropertyName, this.TypeName);
             if (!string.IsNullOrEmpty(this.Prefix))
             {
@@ -101,7 +103,7 @@ namespace Unity.Configuration
                     Constants.ExtensionTypeNotFound, this.TypeName));
             }
 
-            if (!typeof(SectionExtension).IsAssignableFrom(extensionType))
+            if (!typeof(Abstractions.SectionExtension).IsAssignableFrom(extensionType))
             {
                 throw new ConfigurationErrorsException(string.Format(CultureInfo.CurrentCulture,
                     Constants.ExtensionTypeNotValid, this.TypeName));

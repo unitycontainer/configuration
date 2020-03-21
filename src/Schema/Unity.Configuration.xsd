@@ -116,8 +116,12 @@
     <xs:attribute name="type" type="TypeName_Type" use="required"/>
   </xs:complexType>
 
+	<xs:complexType name="UsingElement">
+		<xs:attribute name="name" type="IdentifierName_Type"/>
+		<xs:attribute name="namespace" type="TypeName_Type" use="required"/>
+	</xs:complexType>
 
-  <xs:complexType name="SectionExtensionElement">
+	<xs:complexType name="SectionExtensionElement">
     <xs:attribute name="prefix" type="IdentifierName_Type"/>
     <xs:attribute name="type" type="SectionExtensionTypeName_Type" use="required"/>
   </xs:complexType>

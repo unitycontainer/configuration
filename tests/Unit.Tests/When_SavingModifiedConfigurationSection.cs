@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Xml;
-using Microsoft.Practices.Unity.Configuration.Tests.TestObjects;
+﻿using Microsoft.Practices.Unity.Configuration.Tests.TestObjects;
 using Microsoft.Practices.Unity.TestSupport;
 using Microsoft.Practices.Unity.TestSupport.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Unity.Configuration;
+using System;
+using System.Linq;
+using System.Xml;
 using Unity.Configuration.Abstractions;
 
 namespace Microsoft.Practices.Unity.Configuration.Tests
