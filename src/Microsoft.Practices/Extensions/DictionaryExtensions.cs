@@ -1,5 +1,4 @@
-﻿
-
+﻿using System;
 using System.Collections.Generic;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
@@ -17,18 +16,10 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// <param name="dictionary">Dictionary to search.</param>
         /// <param name="key">Key to look up.</param>
         /// <returns>The value at the key or null if not in the dictionary.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public static TValue GetOrNull<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key)
         {
-            Microsoft.Practices.Unity.Utility.Guard.ArgumentNotNull(dictionary, "dictionary");
-
-            TValue value;
-            if (dictionary.TryGetValue(key, out value))
-            {
-                return value;
-            }
-            return default(TValue);
+            return (dictionary ?? throw new ArgumentNullException(nameof(dictionary))).TryGetValue(key, out TValue value) 
+                ? value : (default);
         }
     }
 }

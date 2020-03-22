@@ -1,10 +1,7 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics.CodeAnalysis;
 using System.Xml;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
@@ -14,7 +11,6 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
     /// used to interpret that element.
     /// </summary>
     /// <typeparam name="TContainingElement"></typeparam>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Not a collection, only implements IEnumerable to get initialization syntax.")]
     public class UnknownElementHandlerMap<TContainingElement> :
         IEnumerable<KeyValuePair<string, Action<TContainingElement, XmlReader>>>
         where TContainingElement : ConfigurationElement
@@ -41,8 +37,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// <returns>true if processed, false if not.</returns>
         public bool ProcessElement(TContainingElement parentElement, string elementName, XmlReader reader)
         {
-            Action<TContainingElement, XmlReader> action;
-            if (elementActionMap.TryGetValue(elementName, out action))
+            if (elementActionMap.TryGetValue(elementName, out Action<TContainingElement, XmlReader> action))
             {
                 action(parentElement, reader);
                 return true;
@@ -97,8 +92,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 
         public bool ProcessElement(string elementName, XmlReader reader)
         {
-            Action<XmlReader> action;
-            if (elementActionMap.TryGetValue(elementName, out action))
+            if (elementActionMap.TryGetValue(elementName, out Action<XmlReader> action))
             {
                 action(reader);
                 return true;

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Unity.Configuration;
-using Unity;
 using Unity.Lifetime;
 
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
@@ -13,8 +11,6 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
     /// A helper class that implements the actual logic for resolving a shorthand
     /// type name (alias or raw type name) into an actual type object.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix", Justification = "Impl is common suffix for implementation class")]
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Impl", Justification = "Impl is common suffix for implementation class")]
     public class TypeResolverImpl
     {
         private readonly Dictionary<string, string> aliases;
@@ -65,8 +61,6 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         /// <param name="aliasesSequence">Type aliases from the configuration file.</param>
         /// <param name="assemblies">Assembly names to search.</param>
         /// <param name="namespaces">Namespaces to search.</param>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Use of nested generic types is appropriate here")]
-        [SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods", Justification = "Validation done by Guard class")]
         public TypeResolverImpl(IEnumerable<KeyValuePair<string, string>> aliasesSequence,
             IEnumerable<string> namespaces, IEnumerable<string> assemblies)
         {
@@ -79,9 +73,11 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
             }
 
             this.namespaces = new List<string>(namespaces);
-            this.assemblies = new List<string>(assemblies);
-            this.assemblies.Add(typeof(object).Assembly.FullName);
-            this.assemblies.Add(typeof(Uri).Assembly.FullName);
+            this.assemblies = new List<string>(assemblies)
+            {
+                typeof(object).Assembly.FullName,
+                typeof(Uri).Assembly.FullName
+            };
         }
 
         /// <summary>
@@ -158,8 +154,7 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 
         private static Type ResolveDefaultAlias(string typeNameOrAlias)
         {
-            Type mappedType;
-            if (DefaultAliases.TryGetValue(typeNameOrAlias, out mappedType) ||
+            if (DefaultAliases.TryGetValue(typeNameOrAlias, out Type mappedType) ||
                 DefaultAliases.TryGetValue(RemoveGenericWart(typeNameOrAlias), out mappedType))
             {
                 return mappedType;

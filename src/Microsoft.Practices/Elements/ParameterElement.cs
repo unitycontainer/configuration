@@ -1,15 +1,15 @@
-﻿using System;
+﻿using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
+using Microsoft.Practices.Unity.Utility;
+using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Xml;
-using Microsoft.Practices.Unity.Configuration.ConfigurationHelpers;
-using Unity.Configuration;
-using Microsoft.Practices.Unity.Utility;
 using Unity;
-using Unity.Injection;
+using Unity.Configuration;
 using Unity.Configuration.Abstractions;
+using Unity.Injection;
 
 namespace Microsoft.Practices.Unity.Configuration
 {
@@ -99,8 +99,6 @@ namespace Microsoft.Practices.Unity.Configuration
         /// <param name="container">Container being configured.</param>
         /// <param name="parameterType">Type of the parameter.</param>
         /// <returns>The value to use to configure the container.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public ParameterValue GetParameterValue(IUnityContainer container, Type parameterType)
         {
             Guard.ArgumentNotNull(parameterType, "parameterType");
@@ -124,8 +122,6 @@ namespace Microsoft.Practices.Unity.Configuration
         /// </summary>
         /// <param name="parameterInfo">Information about the parameter.</param>
         /// <returns>True if this is a match, false if not.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public bool Matches(ParameterInfo parameterInfo)
         {
             Guard.ArgumentNotNull(parameterInfo, "parameterInfo");
@@ -214,8 +210,6 @@ namespace Microsoft.Practices.Unity.Configuration
         /// calling this method, so deriving classes only need to write the element content, not
         /// the start or end tags.</remarks>
         /// <param name="writer">Writer to send XML content to.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:ValidateArgumentsOfPublicMethods",
-            Justification = "Validation done by Guard class")]
         public override void SerializeContent(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
