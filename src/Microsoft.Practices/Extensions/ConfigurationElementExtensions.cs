@@ -4,6 +4,8 @@ using System.Configuration;
 using System.Xml;
 using Unity.Configuration.Abstractions;
 
+#pragma warning disable IDE0060 // Remove unused parameter
+
 namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
 {
     /// <summary>
@@ -64,3 +66,5 @@ namespace Microsoft.Practices.Unity.Configuration.ConfigurationHelpers
         }
     }
 }
+
+#pragma warning restore IDE0060 // Remove unused parameter
