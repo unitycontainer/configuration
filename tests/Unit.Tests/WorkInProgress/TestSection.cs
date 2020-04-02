@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Unity.Configuration;
 
-namespace WorkInProgress
+namespace WorkInProgress.Tests
 {
     [TestClass]
     public class TestSection : UnityConfigurationFixture

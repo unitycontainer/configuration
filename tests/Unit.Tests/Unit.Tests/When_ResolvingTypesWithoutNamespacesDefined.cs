@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using Unity.Configuration.ConfigurationHelpers;
 using Unity.Lifetime;
 
-namespace Microsoft.Practices.Unity.Configuration.Tests
+namespace Unit.Tests
 {
     /// <summary>
-    /// Summary description for When_ResolvingTypes
+    /// Summary description for When_ResolvingTypesWithoutNamespacesDefined
     /// </summary>
     [TestClass]
-    public class When_ResolvingTypes
+    public class When_ResolvingTypesWithoutNamespacesDefined
     {
         private TypeResolverImpl typeResolver;
 
@@ -25,8 +25,8 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
                     { "MockLogger", "Microsoft.Practices.Unity.TestSupport.MockLogger, Unity.Configuration.Tests" }
                 };
 
-            var namespaces = new[] { "System", "System.Collections.Generic", "Unity.Configuration.Tests" };
-            var assemblies = new[] { "System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "Unity.TestSupport", "an invalid assembly name", "invalid, invalid" };
+            var namespaces = new string[0];
+            var assemblies = new[] { "System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089", "Unity.Configuration.Tests", "an invalid assembly name", "invalid, invalid" };
 
             typeResolver = new TypeResolverImpl(aliases, namespaces, assemblies);
         }
@@ -68,7 +68,7 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
                     { "HierarchicalLifetimeManager", typeof(HierarchicalLifetimeManager) },
                     { "resolve", typeof(PerResolveLifetimeManager) },
                     { "perresolve", typeof(PerResolveLifetimeManager) },
-                    { "PerResolveLifetimeManager", typeof(PerResolveLifetimeManager) }
+                    { "PerResolveLifetimeManager", typeof(PerResolveLifetimeManager) },
                 };
 
             foreach (var kv in expected)
@@ -84,52 +84,21 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
         }
 
         [TestMethod]
-        public void Then_GuidIsFoundThroughSearch()
+        public void Then_ILoggerResolvesThroughSearch()
         {
-            Assert.AreSame(typeResolver.ResolveType("Guid", true), typeof(Guid));
-        }
-
-        [TestMethod]
-        public void Then_UriIsFoundThroughSearch()
-        {
-            Assert.AreSame(typeResolver.ResolveType("Uri", true), typeof(Uri));
-        }
-
-        [TestMethod]
-        public void Then_OpenGenericIsResolvedThroughSearch()
-        {
-            Assert.AreSame(typeResolver.ResolveType("Dictionary`2", true), typeof(Dictionary<,>));
-        }
-
-        [TestMethod]
-        public void Then_OpenGenericShorthandIsResolvedThroughSearch()
-        {
-            Assert.AreSame(typeResolver.ResolveType("Dictionary[,]", true), typeof(Dictionary<,>));
+            Assert.AreSame(typeResolver.ResolveType("Microsoft.Practices.Unity.TestSupport.ILogger", true), typeof(ILogger));
         }
 
         [TestMethod]
         public void Then_ShorthandForOpenGenericWithOneParameterWorks()
         {
-            Assert.AreSame(typeResolver.ResolveType("List[]", true), typeof(List<>));
+            Assert.AreSame(typeResolver.ResolveType("System.Collections.Generic.List[]", true), typeof(List<>));
         }
 
         [TestMethod]
         public void Then_ShorthandGenericIsResolved()
         {
-            Assert.AreSame(typeResolver.ResolveType("List[int]", true), typeof(List<int>));
-        }
-
-        [TestMethod]
-        public void Then_ShorthandWithMultipleParametersIsResolved()
-        {
-            Assert.AreSame(typeResolver.ResolveType("Func[int, string]", true), typeof(Func<int, string>));
-        }
-
-        [TestMethod]
-        public void Then_ShorthandWithLeadingAliasIsResolved()
-        {
-            Assert.AreSame(typeResolver.ResolveType("dict[string, datetime]", true),
-                typeof(Dictionary<string, DateTime>));
+            Assert.AreSame(typeResolver.ResolveType("System.Collections.Generic.List[int]", true), typeof(List<int>));
         }
 
         [TestMethod]

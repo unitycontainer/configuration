@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.Practices.Unity.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Xml;
-using Unity.Configuration;
 
-namespace Microsoft.Practices.Unity.Configuration.Tests
+namespace WorkInProgress.Tests
 {
     [TestClass]
     public class When_DeserializingParameterElement

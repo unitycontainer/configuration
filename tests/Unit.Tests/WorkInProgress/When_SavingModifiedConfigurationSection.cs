@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity.Configuration.Tests.TestObjects;
+﻿using Microsoft.Practices.Unity.Configuration;
+using Microsoft.Practices.Unity.Configuration.Tests.TestObjects;
 using Microsoft.Practices.Unity.TestSupport;
 using Microsoft.Practices.Unity.TestSupport.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Xml;
 using Unity.Configuration.Abstractions;
 
-namespace Microsoft.Practices.Unity.Configuration.Tests
+namespace WorkInProgress.Tests
 {
     [TestClass]
     public class When_SavingModifiedConfigurationSection
