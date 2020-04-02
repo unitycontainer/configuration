@@ -1,11 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text;
-using System.Configuration;
-using Microsoft.Practices.Unity.Configuration.Tests.ConfigFiles;
-using Microsoft.Practices.Unity.TestSupport.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Unity;
-
 
 namespace Microsoft.Practices.Unity.Configuration.Tests
 {
@@ -13,12 +8,14 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
     /// support difference type for optional #130
     /// </summary>
     [TestClass]
-    public class OptionalWithTypeFixture : ContainerConfiguringFixture<ConfigFileLocator>
+    public class OptionalWithTypeFixture : MicrosoftPracticesFixture
     {
-        public OptionalWithTypeFixture()
-           : base("OptionalWithType", String.Empty)
-        {
-        }
+        [ClassInitialize]
+        public static void SetupTests(TestContext context) => InitializeClass(context, "OptionalWithType.config");
+
+        [TestInitialize]
+        public void SetupTest() => LoadContainer();
+
 
         [TestMethod]
         public void When_ConfigurationOptionalWithTypeByPropertyInjection()
@@ -58,59 +55,59 @@ namespace Microsoft.Practices.Unity.Configuration.Tests
             Assert.IsTrue(circle == myPicture.MyCircle, "MyCircle is Circle");
             Assert.IsTrue(square == myPicture.MySquare, "MySquare is Square");
         }
-
-        #region TestSupport
-        /// <summary>
-        /// 
-        /// </summary>
-        public abstract class Shape
-        {
-        }
-
-        public class Circle : Shape
-        {
-            public double Radius { get; set; }
-            public override string ToString()
-            {
-                return $"A circle with a radius of {Radius}";
-            }
-        }
-        public class Square : Shape
-        {
-            public double Side { get; set; }
-            public override string ToString()
-            {
-                return $"Square with side of {Side}";
-            }
-        }
-
-        public class MyPicture : Shape
-        {
-            public MyPicture() { }
-
-            public MyPicture(Shape myCircle, Shape mySquare)
-            {
-                MyCircle = myCircle;
-                MySquare = mySquare;
-            }
-            public Shape MyCircle { get; set; }
-            public Shape MySquare { get; set; }
-
-            public Shape[] Items { get; set; }
-
-            public void Initialize(Shape myCircle, Shape mySquare)
-            {
-                MyCircle = myCircle;
-                MySquare = mySquare;
-            }
-            public override string ToString()
-            {
-                var builder = new StringBuilder();
-                builder.Append($"MyPicture with {MyCircle.ToString()} and {MySquare.ToString()}");
-
-                return $"MyPicture has {MyCircle.ToString()} and { MySquare.ToString()}.";
-            }
-        }
-        #endregion
     }
+
+    #region TestSupport
+
+    public abstract class Shape
+    {
+    }
+
+    public class Circle : Shape
+    {
+        public double Radius { get; set; }
+        public override string ToString()
+        {
+            return $"A circle with a radius of {Radius}";
+        }
+    }
+
+    public class Square : Shape
+    {
+        public double Side { get; set; }
+        public override string ToString()
+        {
+            return $"Square with side of {Side}";
+        }
+    }
+
+    public class MyPicture : Shape
+    {
+        public MyPicture() { }
+
+        public MyPicture(Shape myCircle, Shape mySquare)
+        {
+            MyCircle = myCircle;
+            MySquare = mySquare;
+        }
+        public Shape MyCircle { get; set; }
+        public Shape MySquare { get; set; }
+
+        public Shape[] Items { get; set; }
+
+        public void Initialize(Shape myCircle, Shape mySquare)
+        {
+            MyCircle = myCircle;
+            MySquare = mySquare;
+        }
+        public override string ToString()
+        {
+            var builder = new StringBuilder();
+            builder.Append($"MyPicture with {MyCircle.ToString()} and {MySquare.ToString()}");
+
+            return $"MyPicture has {MyCircle.ToString()} and { MySquare.ToString()}.";
+        }
+    }
+
+    #endregion
 }

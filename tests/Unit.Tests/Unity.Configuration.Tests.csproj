@@ -24,34 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Configurations\EmptySection.config" />
-    <None Remove="Configurations\Fields.config" />
-    <None Remove="Configurations\Test-Section.config" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Configurations\ArrayInjection.config" />
-    <EmbeddedResource Include="Configurations\BasicTypeMapping.config" />
-    <EmbeddedResource Include="Configurations\ContainerExtensions.config" />
-    <EmbeddedResource Include="Configurations\Fields.config" />
-    <EmbeddedResource Include="WorkInProgress\TestSection.config" />
-    <EmbeddedResource Include="Configurations\EmptySection.config" />
-    <EmbeddedResource Include="Configurations\Generics.config" />
-    <EmbeddedResource Include="Configurations\InjectingGenerics.config" />
-    <EmbeddedResource Include="Configurations\MethodInjection.config" />
-    <EmbeddedResource Include="Configurations\OldAliasesSyntax.config" />
-    <EmbeddedResource Include="Configurations\OldTypeMappingSyntax.config" />
-    <EmbeddedResource Include="Configurations\OptionalDependency.config" />
-    <EmbeddedResource Include="Configurations\Properties.config" />
-    <EmbeddedResource Include="Configurations\Lifetimes.config" />
-    <EmbeddedResource Include="Configurations\OldContainersSyntax.config" />
-    <EmbeddedResource Include="Configurations\RegisteringInstances.config" />
-    <EmbeddedResource Include="Configurations\Constructors.config" />
-    <EmbeddedResource Include="Configurations\SectionExtensions.config" />
-    <EmbeddedResource Include="Configurations\SingleSectionMultipleNamedContainers.config" />
-    <EmbeddedResource Include="Configurations\SingleSectionSingleContainer.config" />
-    <EmbeddedResource Include="Configurations\TwoContainersAndAliases.config" />
-    <EmbeddedResource Include="Configurations\VariousConstructors.config" />
+    <EmbeddedResource Include="**\*.config" />
   </ItemGroup>
 
 </Project>
