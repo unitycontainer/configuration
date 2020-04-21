@@ -16,16 +16,9 @@
    
   <ItemGroup>
     <None Remove="ConfigFiles\*.config" />
-  </ItemGroup>
-
   <ItemGroup>
-    <EmbeddedResource Include="ConfigFiles\*.config" />
+    <ProjectReference Include="..\src\Unity.Configuration.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <UnityAbstractions>..\..\Abstractions\src\Unity.Abstractions.csproj</UnityAbstractions>
-    <UnityContainer>..\..\Container\src\Unity.Container.csproj</UnityContainer>
-  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\src\Unity.Configuration.csproj" />
