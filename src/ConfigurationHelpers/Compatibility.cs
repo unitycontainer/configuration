@@ -1,6 +1,7 @@
 ﻿#if NET40
 namespace System.Reflection
 {
+    using System.Collections.Generic;
     using Unity;
 
     internal class TypeInfo 
@@ -145,6 +146,8 @@ namespace System.Reflection
 
 namespace Unity
 {
+    using System;
+    using System.Linq;
     using System.Reflection;
 
 
