@@ -16,6 +16,8 @@
    
   <ItemGroup>
     <None Remove="ConfigFiles\*.config" />
+  </ItemGroup>
+	
   <ItemGroup>
     <ProjectReference Include="..\src\Unity.Configuration.csproj" />
   </ItemGroup>
