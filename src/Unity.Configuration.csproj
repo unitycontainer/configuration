@@ -1,18 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\package.props" />
-
 	<PropertyGroup>
-    <FileVersion>$(Version).0</FileVersion>
-    <AssemblyVersion>$(Version).0</AssemblyVersion>
-    <PackageVersion>$(Version)$(VERSION_SUFFIX)</PackageVersion>
     <PackageId>Unity.Configuration</PackageId>
     <Description>Unity Configuration</Description>
     <Copyright>Copyright © .NET Foundation and Contributors. All Rights Reserved</Copyright>
-    <PackageProjectUrl>https://github.com/unitycontainer/unity</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/unitycontainer/unity</RepositoryUrl>
-    <PackageLicenseUrl>https://github.com/unitycontainer/unity/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageIconUrl>https://avatars1.githubusercontent.com/u/12849707</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/unitycontainer/configuration</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/unitycontainer/configuration</RepositoryUrl>
+    <License>https://github.com/unitycontainer/configuration/blob/master/LICENSE</License>
+    <IconUrl>https://avatars1.githubusercontent.com/u/12849707</IconUrl>
     <PackageTags>Unity Container unitycontainer Microsoft.Practices.Unity IoC Configuration</PackageTags>
     <RepositoryType>git</RepositoryType>
     <Authors>Unity Open Source Project</Authors>
@@ -25,17 +20,8 @@
 
   <!-- Unity.Container -->
 
-  <PropertyGroup>
-    <UnityContainerProject>..\..\Container\src\Unity.Container.csproj</UnityContainerProject>
-    <UnityContainerVersion Condition="'$(UnityContainerVersion)' == ''">$(UnityContainer)</UnityContainerVersion>
-  </PropertyGroup>
-
-  <ItemGroup Condition="Exists('$(UnityContainerProject)')">
-    <ProjectReference Include="$(UnityContainerProject)" />
-  </ItemGroup>
-
-  <ItemGroup Condition="!Exists('$(UnityContainerProject)')">
-    <PackageReference Include="Unity.Container" Version="$(UnityContainerVersion)" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Container\src\Unity.Container.csproj" />
   </ItemGroup>
 
   <!-- Project Configuration -->
@@ -58,18 +44,12 @@
     <DebugType>Full</DebugType>
   </PropertyGroup>
 
-  <!-- Sourcelink -->
+  <!-- Source Link -->
+  
   <PropertyGroup>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
 
 </Project>
