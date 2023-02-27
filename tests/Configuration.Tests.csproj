@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\package.props" />
-
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <RootNamespace>Microsoft.Practices.Unity.Configuration.Tests</RootNamespace>
   </PropertyGroup>
@@ -15,29 +13,12 @@
   </ItemGroup>
    
   <ItemGroup>
-    <None Remove="ConfigFiles\*.config" />
+	<None Remove="ConfigFiles\*.config" />
+    <EmbeddedResource Include="ConfigFiles\*.config" />
   </ItemGroup>
 	
   <ItemGroup>
     <ProjectReference Include="..\src\Unity.Configuration.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\src\Unity.Configuration.csproj" />
-
-    <ProjectReference Include="$(UnityAbstractions)" Condition="Exists('$(UnityAbstractions)')" />
-    <PackageReference Include="Unity.Abstractions" Version="5.11.*" Condition="!Exists('$(UnityAbstractions)')" />
-
-    <ProjectReference Include="$(UnityContainer)" Condition="Exists('$(UnityContainer)')" />
-    <PackageReference Include="Unity.Container" Version="$(UnityContainerVersion)" Condition="!Exists('$(UnityContainer)')" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'netcoreapp2.0'">
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.*" />
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' AND '$(TargetFramework)' != 'netcoreapp2.0'">
-    <Reference Include="System.Configuration" />
   </ItemGroup>
 
 </Project>
