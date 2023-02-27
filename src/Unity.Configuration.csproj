@@ -31,7 +31,6 @@
 
   <PropertyGroup>
     <UnityContainerProject>..\..\Container\src\Unity.Container.csproj</UnityContainerProject>
-    <UnityContainerVersion Condition="'$(UnityContainerVersion)' == ''">$(UnityContainer)</UnityContainerVersion>
   </PropertyGroup>
 
   <ItemGroup Condition="Exists('$(UnityContainerProject)')">
