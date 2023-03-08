@@ -7,7 +7,7 @@
   <!-- Defaults -->
 
   <PropertyGroup>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
     <RootNamespace>Unity</RootNamespace>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
